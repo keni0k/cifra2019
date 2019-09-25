@@ -6,6 +6,7 @@
 
 <div class="container">
   <h1>Database Output</h1>
+  <!--/*@thymesVar id="records" type="java.util.List<java.lang.String>"*/-->
   <ul th:each="record : ${records}">
     <li th:text="${record}"/>
   </ul>

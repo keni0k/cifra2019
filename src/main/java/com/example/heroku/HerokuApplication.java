@@ -41,8 +41,11 @@ public class HerokuApplication {
   @Value("${spring.datasource.url}")
   private String dbUrl;
 
-  @Autowired
-  private DataSource dataSource;
+  private final DataSource dataSource;
+
+  public HerokuApplication(DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(HerokuApplication.class, args);
