@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Table(appliesTo = "message")
 public class Message {
 
-    public Message() { }
+    public Message() {
+    }
 
     public Message(String text) {
         this.text = text;
@@ -27,6 +28,9 @@ public class Message {
     @Column(name = "text")
     private String text;
 
+    @Column(name = "category")
+    private int category;
+
     public String getText() {
         return text;
     }
@@ -34,4 +38,13 @@ public class Message {
     public void setText(String text) {
         this.text = text;
     }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
 }
