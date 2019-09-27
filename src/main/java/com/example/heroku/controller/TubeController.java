@@ -50,10 +50,10 @@ public class TubeController {
 
     @RequestMapping(method = RequestMethod.POST)
     String db_ins(ModelMap modelMap,
-                  int start, int finish,
-                  float z_coord) {
+                  long start, long finish,
+                  float z_coord, long id_property, long id_owners) {
         tubeRepo.saveAndFlush(new Tube(start,
-                finish, z_coord));
+                finish, z_coord, id_property, id_owners));
         return db(modelMap);
     }
 

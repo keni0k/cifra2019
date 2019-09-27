@@ -14,11 +14,14 @@ public class Tube {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-
     @Column(name = "start")
     long start;
     @Column(name = "finish")
     long finish;
+    @Column(name = "id_property")
+    long idProperty;
+    @Column(name = "id_owners")
+    long idOwners;
     @Column(name = "z_coord")
     float zCoord;
     @Column(name = "input_date")
@@ -29,10 +32,12 @@ public class Tube {
     public Tube() {
     }
 
-    public Tube(long start, long finish, float zCoord) {
+    public Tube(long start, long finish, float zCoord, long idProperty, long idOwners) {
         this.start = start;
         this.finish = finish;
         this.zCoord = zCoord;
+        this.idProperty = idProperty;
+        this.idOwners = idOwners;
     }
 
     public long getId() {
@@ -81,5 +86,21 @@ public class Tube {
 
     public void setOutput(Date output) {
         this.output = output;
+    }
+
+    public long getIdProperty() {
+        return idProperty;
+    }
+
+    public void setIdProperty(long idProperty) {
+        this.idProperty = idProperty;
+    }
+
+    public long getIdOwners() {
+        return idOwners;
+    }
+
+    public void setIdOwners(long idOwners) {
+        this.idOwners = idOwners;
     }
 }

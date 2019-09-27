@@ -15,6 +15,8 @@
             <th scope="col">Z-coord</th>
             <th scope="col">Старт</th>
             <th scope="col">Конец</th>
+            <th scope="col">property</th>
+            <th scope="col">owners</th>
             <th scope="col" colspan="2">Действия</th>
         </tr>
         </thead>
@@ -24,6 +26,8 @@
             <td th:text="${record.getzCoord()}">Z-coord</td>
             <td th:text="${record.getStart()}">Широта</td>
             <td th:text="${record.getFinish()}">Долгота</td>
+            <td th:text="${record.getIdProperty()}">prop</td>
+            <td th:text="${record.getIdOwners()}">owners</td>
             <td>
                 <a th:href="@{/tube/edit(id=${record.getId()})}">
                     <i class="far fa-edit"></i>
@@ -55,6 +59,18 @@
                 <span class="input-group-text" id="basic-addon5">Z-координата</span>
             </div>
             <input type="number" name="z_coord" class="form-control input-md"/>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon6">Property</span>
+            </div>
+            <input type="number" name="id_property" class="form-control input-md"/>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon7">Owners</span>
+            </div>
+            <input type="number" name="id_owners" class="form-control input-md"/>
         </div>
         <input type="submit" class="btn btn-md btn-primary btn-block" value="Add"/>
     </form>
