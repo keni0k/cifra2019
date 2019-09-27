@@ -11,10 +11,18 @@
         </div>
     </th:block>
     <!--/*@thymesVar id="records" type="java.util.List<com.example.heroku.model.Message>"*/-->
-    <ul th:each="record : ${records}">
-        <li th:text="${record.getText()}"></li>
-        <li th:text="${record.getCategory()}"></li>
-    </ul>
+    <table>
+        <tr>
+            <th>Текст обращения</th>
+            <th>Катеория обращения</th>
+        </tr>
+        <th:block th:each="record : ${records}">
+            <tr>
+                <td th:text="${record.getText()}">данные</td>
+                <td th:text="${record.getCategory()}">данные</td>
+            </tr>
+        </th:block>
+    </table>
 </div>
 
 </body>
