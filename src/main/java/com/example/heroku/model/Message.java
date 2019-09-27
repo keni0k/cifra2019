@@ -14,8 +14,9 @@ public class Message {
     public Message() {
     }
 
-    public Message(String text) {
+    public Message(String text, int category) {
         this.text = text;
+        this.category = category;
     }
 
     @Id
@@ -45,6 +46,14 @@ public class Message {
 
     public void setCategory(int category) {
         this.category = category;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -18,8 +19,6 @@ import java.util.Map;
 @Controller
 public class OldTypeController {
 
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
     private MessageRepo messageRepo;
 
     public OldTypeController(MessageRepo messageRepo) {
@@ -27,9 +26,12 @@ public class OldTypeController {
     }
 
     @RequestMapping("/")
-    String index(Map<String, Object> model) {
-        model.put("utils", new UtilsForWeb());
-        return "index";
+    String db(ModelMap modelMap) {
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
+        modelMap.addAttribute("records", messageRepo.findAll());
+//        messageRepo.saveAndFlush(new Message("MESSAGE " + messageRepo.findAll().size()));
+        return "db";
     }
 
     @RequestMapping("/json")
@@ -44,13 +46,16 @@ public class OldTypeController {
         return "null";
     }
 
-    @RequestMapping("/db")
-    String db(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
-        modelMap.addAttribute("records", messageRepo.findAll());
-//        messageRepo.saveAndFlush(new Message("MESSAGE " + messageRepo.findAll().size()));
-        return "db";
+    @RequestMapping(value = "/db", method = RequestMethod.POST)
+    String db_ins(ModelMap modelMap,
+                  String text, int category) {
+        messageRepo.saveAndFlush(new Message(text, category));
+        return db(modelMap);
     }
-
+    @RequestMapping(value = "/del_mes", method = RequestMethod.GET)
+    String db_del(ModelMap modelMap,
+                  Long id) {
+        messageRepo.deleteById(id);
+        return "redirect:/";
+    }
 }

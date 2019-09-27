@@ -11,18 +11,39 @@
         </div>
     </th:block>
     <!--/*@thymesVar id="records" type="java.util.List<com.example.heroku.model.Message>"*/-->
-    <table>
+    <table class="table">
+        <thead>
         <tr>
-            <th>Текст обращения</th>
-            <th>Катеория обращения</th>
+            <th scope="col">Текст обращения</th>
+            <th scope="col">Катеория обращения</th>
+            <th scope="col">Удалить</th>
         </tr>
+        </thead>
+        <tbody>
         <th:block th:each="record : ${records}">
             <tr>
                 <td th:text="${record.getText()}">данные</td>
                 <td th:text="${record.getCategory()}">данные</td>
+                <td>
+                    <a th:href="@{/del_mes(id=${record.getId()})}">
+                        <i class="far fa-trash-empty"></i>
+                    </a>
+                </td>
             </tr>
         </th:block>
+        </tbody>
     </table>
+    <form action="/db" method="post">
+        <label>
+            TEXT:
+            <input type="text" name="text"/>
+        </label>
+        <label>
+            Category:
+            <input type="number" name="category"/>
+        </label>
+        <input type="submit"/>
+    </form>
 </div>
 
 </body>
