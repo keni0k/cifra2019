@@ -34,15 +34,19 @@
         </tbody>
     </table>
     <form action="/db" method="post">
-        <label>
-            TEXT:
-            <input type="text" name="text"/>
-        </label>
-        <label>
-            Category:
-            <input type="number" name="category"/>
-        </label>
-        <input type="submit"/>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">TEXT</span>
+                </div>
+                <textarea name="text" class="form-control input-md"></textarea>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">CATEGORY</span>
+                </div>
+                <input type="number" name="category" class="form-control input-md"/>
+            </div>
+            <input type="submit" class="btn btn-md btn-primary btn-block" value="Add"/>
     </form>
 </div>
 
