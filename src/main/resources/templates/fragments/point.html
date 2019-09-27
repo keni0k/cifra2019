@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:fragment="point">
+<!--/*@thymesVar id="records" type="java.util.List<com.example.heroku.model.Point>"*/-->
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Название точки</th>
+        <th scope="col">Широта</th>
+        <th scope="col">Долгота</th>
+        <th scope="col">Размер</th>
+        <th scope="col" colspan="2">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${records}">
+        <td th:text="${record.getId()}">Описание</td>
+        <td th:text="${record.getDescription()}">Описание</td>
+        <td th:text="${record.getLat()}">Широта</td>
+        <td th:text="${record.getLon()}">Долгота</td>
+        <td th:text="${record.getSize()}">Размер</td>
+        <td>
+            <a th:href="@{/point/edit(id=${record.getId()})}">
+                <i class="far fa-edit"></i>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/point/del(id=${record.getId()})}">
+                <i class="far fa-trash-empty"></i>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form action="/point/" method="post">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Название</span>
+        </div>
+        <input type="text" name="description" class="form-control input-md"/>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3">Широта</span>
+        </div>
+        <input type="number" name="lat" class="form-control input-md"/>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon4">Долгота</span>
+        </div>
+        <input type="number" name="lon" class="form-control input-md"/>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2">Размер</span>
+        </div>
+        <input type="number" name="size" class="form-control input-md"/>
+    </div>
+    <input type="submit" class="btn btn-md btn-primary btn-block" value="Add"/>
+</form>
+</div>
+</th:block>
+
+</body>
+</html>

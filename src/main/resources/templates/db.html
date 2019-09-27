@@ -10,45 +10,18 @@
         <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.getType())}, message=${message.getMessage()})">
         </div>
     </th:block>
-    <!--/*@thymesVar id="records" type="java.util.List<com.example.heroku.model.Message>"*/-->
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Текст обращения</th>
-            <th scope="col">Катеория обращения</th>
-            <th scope="col">Удалить</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="record : ${records}">
-            <tr>
-                <td th:text="${record.getText()}">данные</td>
-                <td th:text="${record.getCategory()}">данные</td>
-                <td>
-                    <a th:href="@{/del_mes(id=${record.getId()})}">
-                        <i class="far fa-trash-empty"></i>
-                    </a>
-                </td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
-    <form action="/db" method="post">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">TEXT</span>
-                </div>
-                <textarea name="text" class="form-control input-md"></textarea>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon2">CATEGORY</span>
-                </div>
-                <input type="number" name="category" class="form-control input-md"/>
-            </div>
-            <input type="submit" class="btn btn-md btn-primary btn-block" value="Add"/>
-    </form>
-</div>
+
+    <th:block th:if="${type == 0}">
+        <!--/*@thymesVar id="type" type="java.lang.Integer"*/-->
+        <div th:replace="fragments/point :: point">
+        </div>
+    </th:block>
+
+    <th:block th:if="${type == 1}">
+        <!--/*@thymesVar id="type" type="java.lang.Integer"*/-->
+        <div th:replace="fragments/tube :: tube">
+        </div>
+    </th:block>
 
 </body>
 </html>

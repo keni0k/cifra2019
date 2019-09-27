@@ -1,12 +1,12 @@
 package com.example.heroku.repo;
 
-import com.example.heroku.model.Message;
+import com.example.heroku.model.Tube;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MessageRepo extends JpaRepository<Message, Long> {
+public interface TubeRepo extends JpaRepository<Tube, Long> {
 
-    Message getMessageById(long id);
+    Tube getTubeById(long id);
 
 }
