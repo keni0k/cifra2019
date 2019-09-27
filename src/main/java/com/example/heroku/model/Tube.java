@@ -19,9 +19,9 @@ public class Tube {
     @Column(name = "finish")
     long finish;
     @Column(name = "id_property")
-    long idProperty;
+    Long idProperty;
     @Column(name = "id_owners")
-    long idOwners;
+    Long idOwners;
     @Column(name = "z_coord")
     float zCoord;
     @Column(name = "input_date")
