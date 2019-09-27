@@ -38,6 +38,8 @@ public class Tube {
         this.zCoord = zCoord;
         this.idProperty = idProperty;
         this.idOwners = idOwners;
+        this.input = new Date();
+        this.output = new Date();
     }
 
     public long getId() {
