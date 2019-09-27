@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/tube")
 public class TubeController {
@@ -40,7 +42,11 @@ public class TubeController {
     String json() {
         ObjectMapper obj = new ObjectMapper();
         try {
-            return obj.writeValueAsString(tubeRepo.findAll());
+            List<Tube> tubes = tubeRepo.findAll();
+            tubes.forEach(tube -> tube.setStartPoint(pointRepo.getPointById(tube.getStart())));
+            tubes.forEach(tube -> tube.setEndPoint(pointRepo.getPointById(tube.getFinish())));
+
+            return obj.writeValueAsString(tubes);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

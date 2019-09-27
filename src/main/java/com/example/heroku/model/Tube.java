@@ -29,6 +29,12 @@ public class Tube {
     @Column(name = "output_date")
     Date output;
 
+    @Transient
+    private Point startPoint;
+
+    @Transient
+    private Point endPoint;
+
     public Tube() {
     }
 
@@ -104,5 +110,21 @@ public class Tube {
 
     public void setIdOwners(long idOwners) {
         this.idOwners = idOwners;
+    }
+
+    public Point getStartPoint() {
+        return startPoint;
+    }
+
+    public void setStartPoint(Point startPoint) {
+        this.startPoint = startPoint;
+    }
+
+    public Point getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(Point endPoint) {
+        this.endPoint = endPoint;
     }
 }
