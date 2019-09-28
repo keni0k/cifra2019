@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "user", schema = "public")
@@ -23,6 +22,8 @@ public class User implements UserDetails {
     public long getId() {
         return id;
     }
+
+    public User(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

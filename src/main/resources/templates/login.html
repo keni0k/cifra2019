@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'login')}">
+<body>
+<div class="container main-block">
+    <div class="row">
+        <div class="col-md-12 col-lg-8 col-centred">
+            <div class="page-header">
+                <h2>
+                    Вход<!-- / <a href="/users/registration">
+                    Регистрация</a>-->
+                </h2>
+            </div>
+            <form method="POST" action="/users/login" class="login-form">
+                <br/>
+                <div class="input-group w-full">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Username</span>
+                    </div>
+                    <input name="username" id="login" autofocus="autofocus" type="text" class="form-control input-lg"
+                           placeholder="Login" aria-label="Login" required="">
+                </div>
+                <br/>
+                <div class="input-group w-full">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon4">Password</span>
+                    </div>
+                    <input name="password" id="pass" type="password" class="form-control input-lg" placeholder="Пароль"
+                           aria-label="Password" required="">
+                </div>
+                <br/>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="remember-me" name="remember-me" checked="checked"
+                               style="margin-left: -20px; visibility: visible; left:20px;"><span>Запомнить меня</span>
+                    </label>
+                </div>
+                <br>
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Вход">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
