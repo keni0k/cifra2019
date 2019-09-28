@@ -32,6 +32,7 @@ public class TubeController {
         modelMap.addAttribute("utils", new UtilsForWeb());
         modelMap.addAttribute("type", 1);
         modelMap.addAttribute("tube_ed", new Tube());
+        modelMap.addAttribute("points", pointRepo.findAll());
 //        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
         modelMap.addAttribute("tubes", tubeRepo.findAll());
         return "db";
@@ -95,6 +96,7 @@ public class TubeController {
         modelMap.addAttribute("type", 1);
         modelMap.addAttribute("tube_ed", tubeRepo.getTubeById(id));
         modelMap.addAttribute("tubes", tubeRepo.findAll());
+        modelMap.addAttribute("points", pointRepo.findAll());
         return "db";
     }
 

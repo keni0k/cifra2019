@@ -24,8 +24,8 @@
         <tr th:each="record : ${tubes}">
             <td th:text="${record.getId()}">ID</td>
             <td th:text="${record.getzCoord()}">Z-coord</td>
-            <td th:text="${record.getStart()}">Широта</td>
-            <td th:text="${record.getFinish()}">Долгота</td>
+            <td th:text="${record.getStart()}">Start</td>
+            <td th:text="${record.getFinish()}">Finish</td>
             <td th:text="${record.getIdProperty()}">prop</td>
             <td th:text="${record.getIdOwners()}">owners</td>
             <td>
@@ -43,46 +43,73 @@
     </table>
     <!--/*@thymesVar id="tube_ed" type="com.example.heroku.model.Tube"*/-->
 
-    <form th:action="${tube_ed.getId()==0?'/tube/':'/tube/edit/'}" method="post">
-        <input type="number" name="id" class="gone"
-               th:value="${tube_ed.getId()}"/>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Id start point</span>
-            </div>
-            <input type="number" name="start" class="form-control input-md"
-                   th:value="${tube_ed.getStart()}"/>
+    <div class="row">
+        <div class="col-md-6">
+            <form th:action="${tube_ed.getId()==0?'/tube/':'/tube/edit/'}" method="post">
+                <input type="number" name="id" class="gone"
+                       th:value="${tube_ed.getId()}"/>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Id start point</span>
+                    </div>
+                    <input type="number" name="start" class="form-control input-md"
+                           th:value="${tube_ed.getStart()}"/>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Id finish point</span>
+                    </div>
+                    <input type="number" name="finish" class="form-control input-md"
+                           th:value="${tube_ed.getFinish()}"/>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon5">Z-координата</span>
+                    </div>
+                    <input type="number" name="z_coord" class="form-control input-md"
+                           th:value="${tube_ed.getzCoord()}" step="any"/>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon6">Property</span>
+                    </div>
+                    <input type="number" name="id_property" class="form-control input-md"
+                           th:value="${tube_ed.getIdProperty()}"/>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon7">Owners</span>
+                    </div>
+                    <input type="number" name="id_owners" class="form-control input-md"
+                           th:value="${tube_ed.getIdOwners()}"/>
+                </div>
+                <input type="submit" class="btn btn-md btn-primary btn-block" th:value="${tube_ed.getId()==0?'Add':'Edit'}"/>
+            </form>
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon3">Id finish point</span>
-            </div>
-            <input type="number" name="finish" class="form-control input-md"
-                   th:value="${tube_ed.getFinish()}"/>
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Название точки</th>
+                    <th scope="col">Широта</th>
+                    <th scope="col">Долгота</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--/*@thymesVar id="points" type="java.util.List<com.example.heroku.model.Point>"*/-->
+                <tr th:each="record : ${points}">
+                    <td th:text="${record.getId()}">ID</td>
+                    <td th:text="${record.getDescription()}">Описание</td>
+                    <td th:text="${record.getLat()}">Широта</td>
+                    <td th:text="${record.getLon()}">Долгота</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon5">Z-координата</span>
-            </div>
-            <input type="number" name="z_coord" class="form-control input-md"
-                    th:value="${tube_ed.getzCoord()}" step="any"/>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon6">Property</span>
-            </div>
-            <input type="number" name="id_property" class="form-control input-md"
-                   th:value="${tube_ed.getIdProperty()}"/>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon7">Owners</span>
-            </div>
-            <input type="number" name="id_owners" class="form-control input-md"
-                   th:value="${tube_ed.getIdOwners()}"/>
-        </div>
-        <input type="submit" class="btn btn-md btn-primary btn-block" th:value="${tube_ed.getId()==0?'Add':'Edit'}"/>
-    </form>
+    </div>
+
+
 </th:block>
 
 </body>
