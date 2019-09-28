@@ -49,6 +49,17 @@ public class Tube {
         this.input = new Date();
         this.output = new Date();
     }
+
+    public Tube(long start, long finish, float zCoord, long idOwners, String gost) {
+        this.start = start;
+        this.finish = finish;
+        this.zCoord = zCoord;
+        this.idOwners = idOwners;
+        this.gost = gost;
+        this.input = new Date();
+        this.output = new Date();
+    }
+
     public Tube(long start, long finish, float zCoord, long idOwners,
                 int type, int diameter, int thickness, Date input,
                 Date output, String gost) {

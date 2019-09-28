@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,14 +48,18 @@ public class TubeController {
     @RequestMapping("/json")
     @ResponseBody
     String json(@RequestParam(required = false)
-                        Integer type) {
+                        Integer type,
+                @RequestParam(required = false)
+                        Long id) {
         ObjectMapper obj = new ObjectMapper();
         try {
             List<Tube> tubes;
-            if (type == null)
-                tubes = tubeRepo.findAll();
-            else
+            if (id != null) {
+                tubes = new ArrayList<>();
+                tubes.add(tubeRepo.getTubeById(id));
+            } else if (type != null)
                 tubes = tubeRepo.getTubesByType(type);
+            else tubes = tubeRepo.findAll();
             tubes.forEach(tube -> tube.setStartPoint(pointRepo.getPointById(tube.getStart())));
             tubes.forEach(tube -> tube.setEndPoint(pointRepo.getPointById(tube.getFinish())));
             Date date = new Date();
@@ -79,12 +84,13 @@ public class TubeController {
                    double p2_lat, double p2_lon,
                    int size1, int size2,
                    String desc1, String desc2,
-                   float z_coord, long id_owners) {
+                   float z_coord, long id_owners,
+                   String gost) {
         Point p1 = new Point(desc1, p1_lat, p1_lon, size1);
         Point p2 = new Point(desc2, p2_lat, p2_lon, size2);
         pointRepo.save(p1);
         pointRepo.save(p2);
-        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners);
+        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners, gost);
         tubeRepo.save(tube);
         return "OK";
     }
@@ -102,8 +108,8 @@ public class TubeController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     String db_ins1(ModelMap modelMap,
-                  long start, long finish,
-                  float z_coord, int type, long id_owners) {
+                   long start, long finish,
+                   float z_coord, int type, long id_owners) {
         tubeRepo.saveAndFlush(new Tube(start,
                 finish, z_coord, type, id_owners));
         return db(modelMap);
