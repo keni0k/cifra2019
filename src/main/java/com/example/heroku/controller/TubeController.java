@@ -46,10 +46,15 @@ public class TubeController {
 
     @RequestMapping("/json")
     @ResponseBody
-    String json() {
+    String json(@RequestParam(required = false)
+                        Integer type) {
         ObjectMapper obj = new ObjectMapper();
         try {
-            List<Tube> tubes = tubeRepo.findAll();
+            List<Tube> tubes;
+            if (type == null)
+                tubes = tubeRepo.findAll();
+            else
+                tubes = tubeRepo.getTubesByType(type);
             tubes.forEach(tube -> tube.setStartPoint(pointRepo.getPointById(tube.getStart())));
             tubes.forEach(tube -> tube.setEndPoint(pointRepo.getPointById(tube.getFinish())));
             Date date = new Date();
@@ -74,9 +79,9 @@ public class TubeController {
                    double p2_lat, double p2_lon,
                    int size1, int size2,
                    String desc1, String desc2,
-                   float z_coord, long id_owners){
-        Point p1 = new Point(desc1,p1_lat, p1_lon, size1);
-        Point p2 = new Point(desc2,p2_lat, p2_lon, size2);
+                   float z_coord, long id_owners) {
+        Point p1 = new Point(desc1, p1_lat, p1_lon, size1);
+        Point p2 = new Point(desc2, p2_lat, p2_lon, size2);
         pointRepo.save(p1);
         pointRepo.save(p2);
         Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners);
@@ -102,12 +107,12 @@ public class TubeController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String db_edit(ModelMap modelMap,
-                   @RequestParam(value = "id", required=false) Long id,
-                   @RequestParam(value = "start", required=false) Integer start,
-                   @RequestParam(value = "finish", required=false) Integer finish,
-                   @RequestParam(value = "z_coord", required=false) Float z_coord,
-                   @RequestParam(value = "type", required=false) Integer type,
-                   @RequestParam(value = "id_owners", required=false) Long id_owners) {
+                   @RequestParam(value = "id", required = false) Long id,
+                   @RequestParam(value = "start", required = false) Integer start,
+                   @RequestParam(value = "finish", required = false) Integer finish,
+                   @RequestParam(value = "z_coord", required = false) Float z_coord,
+                   @RequestParam(value = "type", required = false) Integer type,
+                   @RequestParam(value = "id_owners", required = false) Long id_owners) {
         Tube tube = tubeRepo.getTubeById(id);
         if (start != null)
             tube.setStart(start);
@@ -136,7 +141,7 @@ public class TubeController {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     String update(ModelMap modelMap) {
-        for (Tube tube : tubeRepo.findAll()){
+        for (Tube tube : tubeRepo.findAll()) {
             tube.setType(0);
             tube.setDiameter(100);
             tube.setGost("ГОСТ 3262-75");

@@ -46,7 +46,7 @@
     <!--/*@thymesVar id="building_ed" type="com.example.heroku.model.Building"*/-->
 
     <div class="row">
-        <form th:action="${building_ed.getId()==0?'/building/':'/building/edit/'}" method="post">
+        <form th:action="${building_ed.getId()==0?'/building':'/building/edit'}" method="post">
             <input type="number" name="id" class="gone"
                    th:value="${building_ed.getId()}"/>
             <div class="input-group mb-3">
@@ -67,14 +67,14 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon5">Capital Fix</span>
                 </div>
-                <input type="text" name="capital_fix" class="form-control input-md"
+                <input type="text" name="capitalFix" class="form-control input-md"
                        th:value="${building_ed.getCapitalFix()}" step="any"/>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon6">People Count</span>
                 </div>
-                <input type="number" name="people_count" class="form-control input-md"
+                <input type="number" name="peopleCount" class="form-control input-md"
                        th:value="${building_ed.getPeopleCount()}"/>
             </div>
             <div class="input-group mb-3">

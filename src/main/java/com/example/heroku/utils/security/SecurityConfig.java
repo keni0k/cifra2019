@@ -44,16 +44,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/", "/tube/*",
-                        "/tube", "/point", "/point/*", "/building/*", "/building").permitAll()
-                .antMatchers(HttpMethod.POST, "/point/*", "/point", "/tube", "/tube/*", "/building/*", "/building").permitAll()
+                .antMatchers(HttpMethod.GET,"/", "/tube/**",
+                        "/tube", "/point", "/point/**", "/building/*", "/building").permitAll()
+                .antMatchers(HttpMethod.POST, "/point/**", "/point", "/tube", "/tube/**", "/building", "/building/**").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/users/account", "/users/edit_data", "/users/edit_address").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")
 //                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().defaultSuccessUrl("/users/account", false)
+                .formLogin().defaultSuccessUrl("/", false)
                 .loginPage("/users/login").failureUrl("/users/login?error=true").permitAll()
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
