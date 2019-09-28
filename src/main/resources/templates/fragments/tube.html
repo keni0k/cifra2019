@@ -23,8 +23,8 @@
         <tr th:each="record : ${tubes}">
             <td th:text="${record.getId()}">ID</td>
             <td th:text="${record.getzCoord()}">Z-coord</td>
-            <td th:text="${record.getStart()}">Start</td>
-            <td th:text="${record.getFinish()}">Finish</td>
+            <td th:text="${record.getStartPoint().getCoord()}">Start</td>
+            <td th:text="${record.getEndPoint().getCoord()}">Finish</td>
             <td th:text="${record.getIdOwners()}">owners</td>
             <td>
                 <a th:href="@{/tube/edit(id=${record.getId()})}">

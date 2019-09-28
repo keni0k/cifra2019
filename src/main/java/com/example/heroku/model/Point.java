@@ -76,4 +76,12 @@ public class Point {
     public void setSize(int size) {
         this.size = size;
     }
+
+    public String getCoord(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%.5f", lat))
+                     .append(' ')
+                .append(String.format("%.5f", lon));
+        return stringBuilder.toString();
+    }
 }
