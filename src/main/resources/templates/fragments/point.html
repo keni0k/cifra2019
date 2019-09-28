@@ -43,31 +43,45 @@
 <form th:action="${point_ed.getId()==0?'/point/':'/point/edit'}" method="post">
     <input type="number" name="id" class="gone"
            th:value="${point_ed.getId()}"/>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Название</span>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Название</span>
+                </div>
+                <input type="text" name="description" class="form-control input-md"
+                       th:value="${point_ed.getDescription()}"/>
+            </div>
         </div>
-        <input type="text" name="description" class="form-control input-md"
-        th:value="${point_ed.getDescription()}"/>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">Широта</span>
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Размер</span>
+                </div>
+                <input type="number" name="size" th:value="${point_ed.getSize()}" class="form-control input-md"/>
+            </div>
         </div>
-        <input type="number" step="any" th:value="${point_ed.getLat()}" name="lat" class="form-control input-md"/>
     </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon4">Долгота</span>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Широта</span>
+                </div>
+                <input type="number" step="any" th:value="${point_ed.getLat()}" name="lat" class="form-control input-md"/>
+            </div>
         </div>
-        <input type="number" step="any" name="lon" th:value="${point_ed.getLon()}" class="form-control input-md"/>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon2">Размер</span>
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon4">Долгота</span>
+                </div>
+                <input type="number" step="any" name="lon" th:value="${point_ed.getLon()}" class="form-control input-md"/>
+            </div>
         </div>
-        <input type="number" name="size" th:value="${point_ed.getSize()}" class="form-control input-md"/>
     </div>
+
     <input type="submit" class="btn btn-md btn-primary btn-block" th:value="${point_ed.getId()==0?'Add':'Edit'}"/>
 </form>
 </div>

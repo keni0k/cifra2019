@@ -35,7 +35,7 @@ public class Point {
     private double lon;
 
     @Column(name = "size")
-    private int size;
+    private int size = 1;
 
     public String getDescription() {
         return description;
