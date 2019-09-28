@@ -1,8 +1,7 @@
 package com.example.heroku.controller;
 
-import com.example.heroku.model.Point;
-import com.example.heroku.repo.PointRepo;
-import com.example.heroku.utils.MessageUtil;
+import com.example.heroku.model.Building;
+import com.example.heroku.repo.BuildingRepo;
 import com.example.heroku.utils.UtilsForWeb;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,23 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 @Controller
-@RequestMapping("/point")
-public class PointController {
+@RequestMapping("/building")
+public class BuildingController {
 
-    private PointRepo pointRepo;
+    private BuildingRepo buildingRepo;
 
-    public PointController(PointRepo pointRepo) {
-        this.pointRepo = pointRepo;
+    BuildingController(BuildingRepo buildingRepo){
+        this.buildingRepo = buildingRepo;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     String db(ModelMap modelMap) {
         modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("type", 0);
-        modelMap.addAttribute("point_ed", new Point());
+        modelMap.addAttribute("type", 2);
+        modelMap.addAttribute("building_ed", new Building());
 //        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
-        modelMap.addAttribute("points", pointRepo.findAll());
+        modelMap.addAttribute("buildings", buildingRepo.findAll());
         return "db";
     }
 
@@ -37,7 +38,7 @@ public class PointController {
     String json() {
         ObjectMapper obj = new ObjectMapper();
         try {
-            return obj.writeValueAsString(pointRepo.findAll());
+            return obj.writeValueAsString(buildingRepo.findAll());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -45,43 +46,34 @@ public class PointController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    String db_ins(ModelMap modelMap,
-                  String description, double lat, double lon,
-                  int size) {
-        pointRepo.saveAndFlush(new Point(description, lat, lon, size));
+    String db_ins(ModelMap modelMap, String address,
+                  int type, long topLeft, long botRight, long topRight, long botLeft, int countOfPeople, Date created, Date capitalFix) {
+        buildingRepo.saveAndFlush(new Building(address, type, topLeft, botRight, topRight, botLeft, countOfPeople, created, capitalFix));
         return db(modelMap);
     }
 
     @RequestMapping(value = "/del", method = RequestMethod.GET)
     String db_del(ModelMap modelMap,
                   Long id) {
-        pointRepo.deleteById(id);
-        return "redirect:/point/";
+        buildingRepo.deleteById(id);
+        return "redirect:/building/";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String db_edit(ModelMap modelMap, Long id,
-                   String description, Double lat, Double lon,
-                   Integer size) {
-        Point point = pointRepo.getPointById(id);
-        if (description != null)
-            point.setDescription(description);
-        if (lat != null)
-            point.setLat(lat);
-        if (lon != null)
-            point.setLon(lon);
-        if (size != null)
-            point.setSize(size);
-        pointRepo.save(point);
-        return "redirect:/point/";
+                   Integer type, Long topLeft, Long botRight, Long topRight, Long botLeft, Integer countOfPeople, Date created, Date capitalFix) {
+        Building building = buildingRepo.getBuildingById(id);
+        // TOdo edit
+        buildingRepo.save(building);
+        return "redirect:/building/";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     String edit(ModelMap modelMap, Long id) {
         modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("type", 0);
-        modelMap.addAttribute("point_ed", pointRepo.getPointById(id));
-        modelMap.addAttribute("points", pointRepo.findAll());
+        modelMap.addAttribute("type", 2);
+        modelMap.addAttribute("building_ed", buildingRepo.getBuildingById(id));
+        modelMap.addAttribute("buildings", buildingRepo.findAll());
         return "db";
     }
 

@@ -22,5 +22,11 @@
         </div>
     </th:block>
 
+    <th:block th:if="${type == 2}">
+        <!--/*@thymesVar id="type" type="java.lang.Integer"*/-->
+        <div th:replace="fragments/building :: building">
+        </div>
+    </th:block>
+
 </body>
 </html>

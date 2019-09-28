@@ -14,7 +14,7 @@ public class Point {
     public Point() {
     }
 
-    public Point(String description, float lat, float lon, int size) {
+    public Point(String description, double lat, double lon, int size) {
         this.description = description;
         this.lat = lat;
         this.lon = lon;
@@ -29,10 +29,10 @@ public class Point {
     private String description = "";
 
     @Column(name = "lat")
-    private float lat;
+    private double lat;
 
     @Column(name = "lon")
-    private float lon;
+    private double lon;
 
     @Column(name = "size")
     private int size;
@@ -53,19 +53,19 @@ public class Point {
         this.id = id;
     }
 
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(float lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public float getLon() {
+    public double getLon() {
         return lon;
     }
 
-    public void setLon(float lon) {
+    public void setLon(double lon) {
         this.lon = lon;
     }
 
