@@ -264,7 +264,51 @@
             },
             RefreshObjectsOnMap: function () {
                 var url = '/tube/json?type=' + this.type;
+                axios.get(url)
+                    .then((response) => {
+                    var typeColor;
 
+                if (this.type == 0)
+                    typeColor = "#61FFF5";
+                else if(this.type == 1)
+                    typeColor = "#77FF95";
+                else if (this.type == 2)
+                    typeColor = "#B7DCFF";
+                else if (type == 3)
+                    typeColor = "#FECCE4";
+
+                var stoke = {
+                    weight: 7,
+                    color: typeColor
+                };
+
+                var stokeFail = {
+                    weight: 7,
+                    color: "#f00"
+                };
+
+                while (this.tubes.length) {
+                    this.tubes.pop();
+                }
+
+                var self = this;
+
+                response.data.forEach(function(item){
+                    var polyline;
+
+                    if (self.isShowCritical && item.status!=0)
+                        polyline = L.polyline( [ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stokeFail).addTo(map);
+                    else
+                        polyline = L.polyline( [ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stoke).addTo(map);
+
+                    self.tubes.push(polyline);
+                });
+            })
+            .catch(function (error) {
+                    console.log(error);
+                })
+                    .finally(function () {
+                    });
             }
         }
     });
