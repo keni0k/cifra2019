@@ -62,8 +62,9 @@ public class BuildingController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String db_edit(ModelMap modelMap, Long id,
                    Integer type, Long topLeft, Long botRight,
-                   Long topRight, Long botLeft, Integer countOfPeople,
-                   String created, String capitalFix) {
+                   Long topRight, Long botLeft, Integer peopleCount,
+                   String created, String capitalFix,
+                   String address, Long owner) {
         Building building = buildingRepo.getBuildingById(id);
         if (type != null)
             building.setType(type);
@@ -75,12 +76,16 @@ public class BuildingController {
             building.setTopRight(topRight);
         if (botRight != null)
             building.setBotRight(botRight);
-        if (countOfPeople != null)
-            building.setPeopleCount(countOfPeople);
+        if (peopleCount != null)
+            building.setPeopleCount(peopleCount);
         if (created != null)
             building.setCreated(created);
         if (capitalFix != null)
             building.setCapitalFix(capitalFix);
+        if (address != null)
+            building.setAddress(address);
+        if (owner != null)
+            building.setOwner(owner);
         // TOdo edit
         buildingRepo.save(building);
         return "redirect:/building/";

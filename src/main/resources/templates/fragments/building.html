@@ -13,9 +13,9 @@
         <tr><!--String address,-->
             <th scope="col">ID</th>
             <th scope="col">type</th>
+            <th scope="col">peopleCount</th>
             <th scope="col">created</th>
             <th scope="col">capitalFix</th>
-            <th scope="col">peopleCount</th>
             <th scope="col">address</th>
             <th scope="col">owner</th>
             <th scope="col" colspan="2">Действия</th>
@@ -25,9 +25,9 @@
         <tr th:each="record : ${buildings}">
             <td th:text="${record.getId()}">ID</td>
             <td th:text="${record.getType()}">Type</td>
+            <td th:text="${record.getPeopleCount()}">prop</td>
             <td th:text="${record.getCreated().toString()}">Created</td>
             <td th:text="${record.getCapitalFix().toString()}">Finish</td>
-            <td th:text="${record.getPeopleCount()}">prop</td>
             <td th:text="${record.getAddress()}">address</td>
             <td th:text="${record.getOwner()}">owners</td>
             <td>
@@ -45,56 +45,113 @@
     </table>
     <!--/*@thymesVar id="building_ed" type="com.example.heroku.model.Building"*/-->
 
-    <div class="row">
-        <form th:action="${building_ed.getId()==0?'/building':'/building/edit'}" method="post">
-            <input type="number" name="id" class="gone"
-                   th:value="${building_ed.getId()}"/>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Type</span>
+
+    <form th:action="${building_ed.getId()==0?'/building':'/building/edit'}" method="post">
+        <input type="number" name="id" class="gone"
+               th:value="${building_ed.getId()}"/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Type</span>
+                    </div>
+                    <input type="number" name="type" class="form-control input-md"
+                           th:value="${building_ed.getType()}"/>
                 </div>
-                <input type="number" name="type" class="form-control input-md"
-                       th:value="${building_ed.getType()}"/>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Created</span>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Created</span>
+                    </div>
+                    <input type="text" name="created" class="form-control input-md"
+                           th:value="${building_ed.getCreated()}"/>
                 </div>
-                <input type="text" name="created" class="form-control input-md"
-                       th:value="${building_ed.getCreated()}"/>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon5">Capital Fix</span>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon5">Capital Fix</span>
+                    </div>
+                    <input type="text" name="capitalFix" class="form-control input-md"
+                           th:value="${building_ed.getCapitalFix()}" step="any"/>
                 </div>
-                <input type="text" name="capitalFix" class="form-control input-md"
-                       th:value="${building_ed.getCapitalFix()}" step="any"/>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon6">People Count</span>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon6">People Count</span>
+                    </div>
+                    <input type="number" name="peopleCount" class="form-control input-md"
+                           th:value="${building_ed.getPeopleCount()}"/>
                 </div>
-                <input type="number" name="peopleCount" class="form-control input-md"
-                       th:value="${building_ed.getPeopleCount()}"/>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon8">Address</span>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon8">Address</span>
+                    </div>
+                    <input type="text" name="address" class="form-control input-md"
+                           th:value="${building_ed.getAddress()}"/>
                 </div>
-                <input type="text" name="address" class="form-control input-md"
-                       th:value="${building_ed.getAddress()}"/>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon7">Owner</span>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon7">Owner</span>
+                    </div>
+                    <input type="number" name="owner" class="form-control input-md"
+                           th:value="${building_ed.getOwner()}"/>
                 </div>
-                <input type="number" name="owner" class="form-control input-md"
-                       th:value="${building_ed.getOwner()}"/>
             </div>
-            <input type="submit" class="btn btn-md btn-primary btn-block"
-                   th:value="${building_ed.getId()==0?'Add':'Edit'}"/>
-        </form>
-    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon9">TopLeftId</span>
+                    </div>
+                    <input type="number" name="topLeft" class="form-control input-md"
+                           th:value="${building_ed.getTopLeft()}"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon10">TopRightId</span>
+                    </div>
+                    <input type="number" name="topRight" class="form-control input-md"
+                           th:value="${building_ed.getTopRight()}"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon11">BotRightId</span>
+                    </div>
+                    <input type="number" name="botRight" class="form-control input-md"
+                           th:value="${building_ed.getBotRight()}"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon12">BotLeftId</span>
+                    </div>
+                    <input type="number" name="botLeft" class="form-control input-md"
+                           th:value="${building_ed.getBotLeft()}"/>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-md btn-primary btn-block"
+               th:value="${building_ed.getId()==0?'Add':'Edit'}"/>
+    </form>
 
 
 </th:block>
