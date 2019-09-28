@@ -92,6 +92,17 @@ public class TubeController {
     @RequestMapping(method = RequestMethod.POST)
     String db_ins(ModelMap modelMap,
                   long start, long finish,
+                  float z_coord, int type, long id_owners,
+                  int diameter, int thickness, String gost,
+                  Date inputDate, Date outputDate) {
+        tubeRepo.saveAndFlush(new Tube(start,
+                finish, z_coord, id_owners, type, diameter, thickness, inputDate, outputDate, gost));
+        return db(modelMap);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    String db_ins(ModelMap modelMap,
+                  long start, long finish,
                   float z_coord, int type, long id_owners) {
         tubeRepo.saveAndFlush(new Tube(start,
                 finish, z_coord, type, id_owners));
