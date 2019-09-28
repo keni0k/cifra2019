@@ -28,7 +28,8 @@ public class Tube {
     Date input;
     @Column(name = "output_date")
     Date output;
-
+    @Transient
+    int status;
     @Transient
     private Point startPoint;
 
@@ -126,5 +127,13 @@ public class Tube {
 
     public void setEndPoint(Point endPoint) {
         this.endPoint = endPoint;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

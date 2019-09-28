@@ -1,10 +1,8 @@
 package com.example.heroku.controller;
 
-import com.example.heroku.model.Point;
 import com.example.heroku.model.Tube;
 import com.example.heroku.repo.PointRepo;
 import com.example.heroku.repo.TubeRepo;
-import com.example.heroku.utils.MessageUtil;
 import com.example.heroku.utils.UtilsForWeb;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,6 +21,7 @@ public class TubeController {
 
     private TubeRepo tubeRepo;
     private PointRepo pointRepo;
+
     public TubeController(TubeRepo tubeRepo, PointRepo pointRepo) {
         this.pointRepo = pointRepo;
         this.tubeRepo = tubeRepo;
@@ -46,6 +46,13 @@ public class TubeController {
             List<Tube> tubes = tubeRepo.findAll();
             tubes.forEach(tube -> tube.setStartPoint(pointRepo.getPointById(tube.getStart())));
             tubes.forEach(tube -> tube.setEndPoint(pointRepo.getPointById(tube.getFinish())));
+            Date date = new Date();
+            for (Tube t : tubes) {
+                float red = (float) (t.getOutput().getTime() - date.getTime()) / (date.getTime() - t.getInput().getTime());
+                red *= 10;
+                red = (float) 1 / red;
+                t.setStatus(Math.round(red));
+            }
 
             return obj.writeValueAsString(tubes);
         } catch (JsonProcessingException e) {
