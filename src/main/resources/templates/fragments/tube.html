@@ -42,7 +42,6 @@
     <!--/*@thymesVar id="tube_ed" type="com.example.heroku.model.Tube"*/-->
 
     <div class="row">
-        <div class="col-md-6">
             <form th:action="${tube_ed.getId()==0?'/tube/':'/tube/edit/'}" method="post">
                 <input type="number" name="id" class="gone"
                        th:value="${tube_ed.getId()}"/>
@@ -76,28 +75,6 @@
                 </div>
                 <input type="submit" class="btn btn-md btn-primary btn-block" th:value="${tube_ed.getId()==0?'Add':'Edit'}"/>
             </form>
-        </div>
-        <div class="col-md-6">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Название точки</th>
-                    <th scope="col">Широта</th>
-                    <th scope="col">Долгота</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!--/*@thymesVar id="points" type="java.util.List<com.example.heroku.model.Point>"*/-->
-                <tr th:each="record : ${points}">
-                    <td th:text="${record.getId()}">ID</td>
-                    <td th:text="${record.getDescription()}">Описание</td>
-                    <td th:text="${record.getLat()}">Широта</td>
-                    <td th:text="${record.getLon()}">Долгота</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 
 
