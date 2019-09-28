@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Configuration
 @EnableAutoConfiguration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -37,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/resources/**", "/actuator/**");
+        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/resources/**", "/font/**", "/public/**");
     }
 
     @Override
