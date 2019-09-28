@@ -7,7 +7,7 @@
 <body>
 
 <th:block th:fragment="point">
-<!--/*@thymesVar id="records" type="java.util.List<com.example.heroku.model.Point>"*/-->
+<!--/*@thymesVar id="points" type="java.util.List<com.example.heroku.model.Point>"*/-->
 <table class="table">
     <thead>
     <tr>
@@ -20,7 +20,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="record : ${records}">
+    <tr th:each="record : ${points}">
         <td th:text="${record.getId()}">Описание</td>
         <td th:text="${record.getDescription()}">Описание</td>
         <td th:text="${record.getLat()}">Широта</td>
@@ -39,32 +39,36 @@
     </tr>
     </tbody>
 </table>
-<form action="/point/" method="post">
+<!--/*@thymesVar id="point_ed" type="com.example.heroku.model.Point"*/-->
+<form th:action="${point_ed.getId()==0?'/point/':'/point/edit'}" method="post">
+    <input type="number" name="id" class="gone"
+           th:value="${point_ed.getId()}"/>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Название</span>
         </div>
-        <input type="text" name="description" class="form-control input-md"/>
+        <input type="text" name="description" class="form-control input-md"
+        th:value="${point_ed.getDescription()}"/>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon3">Широта</span>
         </div>
-        <input type="number" name="lat" class="form-control input-md"/>
+        <input type="number" step="any" th:value="${point_ed.getLat()}" name="lat" class="form-control input-md"/>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon4">Долгота</span>
         </div>
-        <input type="number" name="lon" class="form-control input-md"/>
+        <input type="number" step="any" name="lon" th:value="${point_ed.getLon()}" class="form-control input-md"/>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon2">Размер</span>
         </div>
-        <input type="number" name="size" class="form-control input-md"/>
+        <input type="number" name="size" th:value="${point_ed.getSize()}" class="form-control input-md"/>
     </div>
-    <input type="submit" class="btn btn-md btn-primary btn-block" value="Add"/>
+    <input type="submit" class="btn btn-md btn-primary btn-block" th:value="${point_ed.getId()==0?'Add':'Edit'}"/>
 </form>
 </div>
 </th:block>

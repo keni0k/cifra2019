@@ -4,7 +4,6 @@
 <body>
 
 <div class="container">
-    <h1>Database Output</h1>
     <th:block th:if="${message != null}">
         <!--/*@thymesVar id="message" type="com.example.heroku.utils.MessageUtil"*/-->
         <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.getType())}, message=${message.getMessage()})">

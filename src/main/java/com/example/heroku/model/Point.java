@@ -26,7 +26,7 @@ public class Point {
     private long id;
 
     @Column(name = "description")
-    private String description;
+    private String description = "";
 
     @Column(name = "lat")
     private float lat;

@@ -26,9 +26,9 @@ public class PointController {
     String db(ModelMap modelMap) {
         modelMap.addAttribute("utils", new UtilsForWeb());
         modelMap.addAttribute("type", 0);
-
-        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
-        modelMap.addAttribute("records", pointRepo.findAll());
+        modelMap.addAttribute("point_ed", new Point());
+//        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
+        modelMap.addAttribute("points", pointRepo.findAll());
         return "db";
     }
 
@@ -60,7 +60,6 @@ public class PointController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    @ResponseBody
     String db_edit(ModelMap modelMap, Long id,
                    String description, Float lat, Float lon,
                    Integer size) {
@@ -74,7 +73,16 @@ public class PointController {
         if (size != null)
             point.setSize(size);
         pointRepo.save(point);
-        return "saved";
+        return "redirect:/point/";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    String edit(ModelMap modelMap, Long id) {
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        modelMap.addAttribute("type", 0);
+        modelMap.addAttribute("point_ed", pointRepo.getPointById(id));
+        modelMap.addAttribute("points", pointRepo.findAll());
+        return "db";
     }
 
 }

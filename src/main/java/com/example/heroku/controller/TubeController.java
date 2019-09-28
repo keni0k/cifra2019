@@ -31,8 +31,8 @@ public class TubeController {
     String db(ModelMap modelMap) {
         modelMap.addAttribute("utils", new UtilsForWeb());
         modelMap.addAttribute("type", 1);
-
-        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
+        modelMap.addAttribute("tube_ed", new Tube());
+//        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
         modelMap.addAttribute("tubes", tubeRepo.findAll());
         return "db";
     }
@@ -70,17 +70,32 @@ public class TubeController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    @ResponseBody
     String db_edit(ModelMap modelMap, Long id,
-                   Integer start, Integer finish) {
+                   Integer start, Integer finish,
+                   Float z_coord, Long id_property, Long id_owners) {
         Tube tube = tubeRepo.getTubeById(id);
         if (start != null)
             tube.setStart(start);
         if (finish != null)
             tube.setFinish(finish);
+        if (z_coord != null)
+            tube.setzCoord(z_coord);
+        if (id_property != null)
+            tube.setIdProperty(id_property);
+        if (id_owners != null)
+            tube.setIdOwners(id_owners);
         //todo: rasshirit
         tubeRepo.save(tube);
-        return "saved";
+        return "redirect:/tube/";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    String edit(ModelMap modelMap, Long id) {
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        modelMap.addAttribute("type", 1);
+        modelMap.addAttribute("tube_ed", tubeRepo.getTubeById(id));
+        modelMap.addAttribute("tubes", tubeRepo.findAll());
+        return "db";
     }
 
 }
