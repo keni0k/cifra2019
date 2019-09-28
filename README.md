@@ -1,4 +1,4 @@
-# gradle-getting-started
+# ARCHIMED
 
 A barebones Gradle app, which can easily be deployed to Heroku.
 
