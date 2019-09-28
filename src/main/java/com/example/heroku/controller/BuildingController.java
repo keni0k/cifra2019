@@ -19,7 +19,7 @@ public class BuildingController {
 
     private BuildingRepo buildingRepo;
 
-    BuildingController(BuildingRepo buildingRepo){
+    BuildingController(BuildingRepo buildingRepo) {
         this.buildingRepo = buildingRepo;
     }
 
@@ -47,7 +47,7 @@ public class BuildingController {
 
     @RequestMapping(method = RequestMethod.POST)
     String db_ins(ModelMap modelMap, String address,
-                  int type, long topLeft, long botRight, long topRight, long botLeft, int countOfPeople, Date created, Date capitalFix) {
+                  int type, long topLeft, long botRight, long topRight, long botLeft, int countOfPeople, String created, String capitalFix) {
         buildingRepo.saveAndFlush(new Building(address, type, topLeft, botRight, topRight, botLeft, countOfPeople, created, capitalFix));
         return db(modelMap);
     }
@@ -61,8 +61,26 @@ public class BuildingController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String db_edit(ModelMap modelMap, Long id,
-                   Integer type, Long topLeft, Long botRight, Long topRight, Long botLeft, Integer countOfPeople, Date created, Date capitalFix) {
+                   Integer type, Long topLeft, Long botRight,
+                   Long topRight, Long botLeft, Integer countOfPeople,
+                   String created, String capitalFix) {
         Building building = buildingRepo.getBuildingById(id);
+        if (type != null)
+            building.setType(type);
+        if (topLeft != null)
+            building.setTopLeft(topLeft);
+        if (botLeft != null)
+            building.setBotLeft(botLeft);
+        if (topRight != null)
+            building.setTopRight(topRight);
+        if (botRight != null)
+            building.setBotRight(botRight);
+        if (countOfPeople != null)
+            building.setPeopleCount(countOfPeople);
+        if (created != null)
+            building.setCreated(created);
+        if (capitalFix != null)
+            building.setCapitalFix(capitalFix);
         // TOdo edit
         buildingRepo.save(building);
         return "redirect:/building/";

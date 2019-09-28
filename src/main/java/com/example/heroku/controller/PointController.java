@@ -1,7 +1,9 @@
 package com.example.heroku.controller;
 
 import com.example.heroku.model.Point;
+import com.example.heroku.model.Tube;
 import com.example.heroku.repo.PointRepo;
+import com.example.heroku.repo.TubeRepo;
 import com.example.heroku.utils.MessageUtil;
 import com.example.heroku.utils.UtilsForWeb;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/point")
 public class PointController {
 
+    private TubeRepo tubeRepo;
     private PointRepo pointRepo;
 
-    public PointController(PointRepo pointRepo) {
+    public PointController(PointRepo pointRepo, TubeRepo tubeRepo) {
         this.pointRepo = pointRepo;
+        this.tubeRepo = tubeRepo;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -56,6 +60,11 @@ public class PointController {
     String db_del(ModelMap modelMap,
                   Long id) {
         pointRepo.deleteById(id);
+        for (Tube tube : tubeRepo.findAll()) {
+            if (tube.getStart() == id || tube.getFinish() == id){
+                tubeRepo.delete(tube);
+            }
+        }
         return "redirect:/point/";
     }
 

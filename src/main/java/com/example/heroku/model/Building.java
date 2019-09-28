@@ -19,7 +19,7 @@ public class Building {
 
     public Building(){}
 
-    public Building(String address, int type, long topLeft, long botRight, long topRight, long botLeft, int peopleCount, Date created, Date capitalFix) {
+    public Building(String address, int type, long topLeft, long botRight, long topRight, long botLeft, int peopleCount, String created, String capitalFix) {
         this.type = type;
         this.address = address;
         this.topLeft = topLeft;
@@ -41,8 +41,13 @@ public class Building {
     long topRight;
     long botLeft;
     int peopleCount;
-    Date created;
-    Date capitalFix;
+    long owner;
+    String created;
+    String capitalFix;
+
+    public long getId(){
+        return id;
+    }
 
     public String getAddress() {
         return address;
@@ -100,19 +105,27 @@ public class Building {
         this.peopleCount = peopleCount;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 
-    public Date getCapitalFix() {
+    public String getCapitalFix() {
         return capitalFix;
     }
 
-    public void setCapitalFix(Date capitalFix) {
+    public void setCapitalFix(String capitalFix) {
         this.capitalFix = capitalFix;
+    }
+
+    public long getOwner() {
+        return owner;
+    }
+
+    public void setOwner(long owner) {
+        this.owner = owner;
     }
 }
