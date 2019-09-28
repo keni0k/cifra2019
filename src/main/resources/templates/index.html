@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <title>Archimed</title>
     <meta charset="UTF-8">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
-    <link rel="stylesheet" href="css/leaflet.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/leaflet.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/leaflet.js"></script>
-    <script src="js/vue.js"></script>
-	<script src="js/main.js"></script>    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/leaflet.js"></script>
+    <script src="/js/vue.js"></script>
+	<script src="/js/main.js"></script>
 </head>
 <body>
     <div id="app">
@@ -30,7 +30,7 @@
                     <div class="account menu-item">
                             <div class="splitter"></div>
                             <div class="text">Участок №3</div>
-                        <div class="img"><img src="img/avatar.png" alt="Участок №3"></div>
+                        <div class="img"><img src="/img/avatar.png" alt="Участок №3"></div>
                     </div>
                 </div>
                 
@@ -91,7 +91,7 @@
             <div class="btn-close"></div>
             
             <div id="modal-dialog-content-img">
-                <img src="img/Group_7_6.svg" width="70%">
+                <img src="/img/Group_7_6.svg" width="70%">
             </div>
             
         </div>
@@ -106,7 +106,6 @@
     </div>
     
     <script>
-        /*<![CDATA[*/
         var map;
         var typeMap = "#61FFF5";
 
@@ -114,8 +113,9 @@
             el: '#app',
             data: {
                 errors: [],
-                name: null,
-                isShowCritical: false
+                tubes: [],
+                isShowCritical: false,
+                type: 0
             },
             mounted: function () {
                 map = L.map('map', { zoomControl:false
@@ -151,7 +151,7 @@
                         if(!e.data.multiple) {
                             $el.find('.submenuItems').not($next).slideUp().parent().removeClass('open');
                         }
-                    };
+                    }
                     
                     var accordion = new Accordion($('.accordion-menu'), false);
                 });                
@@ -183,21 +183,21 @@
                     var el = e.srcElement;
 
                     Array.from(childs).forEach(function(item){
-                        if (item !== el)
+                        if (item != el)
                             item.classList.remove("active");
                     });
 
                     el.parentElement.classList.add("active");
 
                     if (el.classList.contains("radiobtn1"))
-                        typeMap = "#61FFF5";
+                        this.type = 0;
                     else if (el.classList.contains("radiobtn2"))
-                        typeMap = "#77FF95";
+                        this.type = 1;
                     else if (el.classList.contains("radiobtn3"))
-                        typeMap = "#B7DCFF";
+                        this.type = 2;
                     else if (el.classList.contains("radiobtn4"))
-                        typeMap = "#FECCE4";
-
+                        this.type = 3;
+            
                     this.RefreshObjectsOnMap();
                 },
                 onClickCritical: function() {
@@ -217,14 +217,65 @@
                         btnCritical.text("Отобразить критические участки");
                         btnCritical.removeClass("showCritical");
                     }
+
+                    this.RefreshObjectsOnMap();
                 },
                 RefreshObjectsOnMap: function(){
-                    //var url = 'https://cifra2019.herokuapp.com/tube/json';
-                    var url = 'http://localhost/tube.php';
+                    var url = '/tube/json?type='+this.type;
+                    //var url = 'http://localhost/tube.php';
+
+                    axios.get(url)
+                        .then((response) => {
+                            var typeColor;
+                            
+                            if (this.type == 0)
+                                typeColor = "#61FFF5";
+                            else if(this.type == 1)
+                                typeColor = "#77FF95";
+                            else if (this.type == 2)
+                                typeColor = "#B7DCFF";
+                            else if (type == 3)
+                                typeColor = "#FECCE4";
+
+                            var stoke = {
+                                weight: 7,
+                                color: typeColor
+                            };
+
+                            var stokeFail = {
+                                weight: 7,
+                                color: "#f00"
+                            };
+
+                            while (this.tubes.length) {
+                                this.tubes.pop();
+                            }
+                            
+                            var self = this;
+
+                            response.data.forEach(function(item){
+                                var polyline;
+
+                                if (self.isShowCritical && item.status!=0)
+                                    polyline = L.polyline( [ [ item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stokeFail).addTo(map);
+                                else
+                                    polyline = L.polyline( [ [ item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stoke).addTo(map);
+
+                                    self.tubes.push(polyline);
+                            });
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        })
+                        .finally(function () {
+                        });                    
                 }
             }
         });
-        /*]]>*/
+
+          
+
+      
     </script>
 </body>
 </html>
