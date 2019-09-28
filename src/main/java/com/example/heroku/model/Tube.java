@@ -16,19 +16,19 @@ public class Tube {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     @Column(name = "start")
-    long start;
+    Long start;
     @Column(name = "finish")
-    long finish;
+    Long finish;
     @Column(name = "id_owners")
-    long idOwners;
+    Long idOwners;
     @Column(name = "z_coord")
     float zCoord;
     @Column(name = "type")
-    int type;
+    Integer type;
     @Column(name = "diameter")
-    int diameter;
+    Integer diameter;
     @Column(name = "thickness")
-    int thickness;
+    Integer thickness;
     @Column(name = "gost")
     String gost = "";
     @Column(name = "input_date")
@@ -36,7 +36,7 @@ public class Tube {
     @Column(name = "output_date")
     Date output;
     @Transient
-    int status;
+    Integer status;
     @Transient
     private Point startPoint;
 
@@ -46,7 +46,7 @@ public class Tube {
     public Tube() {
     }
 
-    public Tube(long start, long finish, float zCoord, long idOwners) {
+    public Tube(Long start, Long finish, float zCoord, Long idOwners) {
         this.start = start;
         this.finish = finish;
         this.zCoord = zCoord;
@@ -55,7 +55,7 @@ public class Tube {
         this.output = new Date();
     }
 
-    public Tube(long start, long finish, float zCoord, long idOwners, String gost) {
+    public Tube(Long start, Long finish, float zCoord, Long idOwners, String gost) {
         this.start = start;
         this.finish = finish;
         this.zCoord = zCoord;
@@ -69,8 +69,8 @@ public class Tube {
         this.type = random.nextInt(5);
     }
 
-    public Tube(long start, long finish, float zCoord, long idOwners,
-                int type, int diameter, int thickness, Date input,
+    public Tube(Long start, Long finish, float zCoord, Long idOwners,
+                Integer type, Integer diameter, Integer thickness, Date input,
                 Date output, String gost) {
         this.start = start;
         this.finish = finish;
@@ -84,7 +84,7 @@ public class Tube {
         this.gost = gost;
     }
 
-    public Tube(long start, long finish, float zCoord, int type, long idOwners) {
+    public Tube(Long start, Long finish, float zCoord, Integer type, Long idOwners) {
         this.start = start;
         this.finish = finish;
         this.zCoord = zCoord;
@@ -110,19 +110,19 @@ public class Tube {
         this.zCoord = zCoord;
     }
 
-    public long getStart() {
+    public Long getStart() {
         return start;
     }
 
-    public void setStart(long start) {
+    public void setStart(Long start) {
         this.start = start;
     }
 
-    public long getFinish() {
+    public Long getFinish() {
         return finish;
     }
 
-    public void setFinish(long finish) {
+    public void setFinish(Long finish) {
         this.finish = finish;
     }
 
@@ -142,11 +142,11 @@ public class Tube {
         this.output = output;
     }
 
-    public long getIdOwners() {
+    public Long getIdOwners() {
         return idOwners;
     }
 
-    public void setIdOwners(long idOwners) {
+    public void setIdOwners(Long idOwners) {
         this.idOwners = idOwners;
     }
 
@@ -166,35 +166,35 @@ public class Tube {
         this.endPoint = endPoint;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public int getDiameter() {
+    public Integer getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(int diameter) {
+    public void setDiameter(Integer diameter) {
         this.diameter = diameter;
     }
 
-    public int getThickness() {
+    public Integer getThickness() {
         return thickness;
     }
 
-    public void setThickness(int thickness) {
+    public void setThickness(Integer thickness) {
         this.thickness = thickness;
     }
 

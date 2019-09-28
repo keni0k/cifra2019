@@ -97,11 +97,10 @@ public class TubeController {
     @RequestMapping(method = RequestMethod.POST)
     String db_ins(ModelMap modelMap,
                   long start, long finish,
-                  float z_coord, int type, long id_owners,
-                  int diameter, int thickness, String gost,
-                  Date inputDate, Date outputDate) {
+                  float z_coord, long id_owners,
+                  String gost) {
         tubeRepo.saveAndFlush(new Tube(start,
-                finish, z_coord, id_owners, type, diameter, thickness, inputDate, outputDate, gost));
+                finish, z_coord, id_owners, gost));
         return db(modelMap);
     }
 
@@ -124,8 +123,8 @@ public class TubeController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String db_edit(ModelMap modelMap,
                    @RequestParam(value = "id", required = false) Long id,
-                   @RequestParam(value = "start", required = false) Integer start,
-                   @RequestParam(value = "finish", required = false) Integer finish,
+                   @RequestParam(value = "start", required = false) Long start,
+                   @RequestParam(value = "finish", required = false) Long finish,
                    @RequestParam(value = "z_coord", required = false) Float z_coord,
                    @RequestParam(value = "type", required = false) Integer type,
                    @RequestParam(value = "id_owners", required = false) Long id_owners) {
