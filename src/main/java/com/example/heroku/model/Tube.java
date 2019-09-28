@@ -5,6 +5,7 @@ import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Random;
 
 @AllArgsConstructor
 @Entity
@@ -23,11 +24,11 @@ public class Tube {
     @Column(name = "z_coord")
     float zCoord;
     @Column(name = "type")
-    int type = 0;
+    int type;
     @Column(name = "diameter")
-    int diameter = 100;
+    int diameter;
     @Column(name = "thickness")
-    int thickness = 10;
+    int thickness;
     @Column(name = "gost")
     String gost = "";
     @Column(name = "input_date")
@@ -62,6 +63,10 @@ public class Tube {
         this.gost = gost;
         this.input = new Date();
         this.output = new Date();
+        Random random = new Random();
+        this.diameter = random.nextInt(100) + 50;
+        this.thickness = random.nextInt(5) + 5;
+        this.type = random.nextInt(5);
     }
 
     public Tube(long start, long finish, float zCoord, long idOwners,
@@ -78,6 +83,7 @@ public class Tube {
         this.thickness = thickness;
         this.gost = gost;
     }
+
     public Tube(long start, long finish, float zCoord, int type, long idOwners) {
         this.start = start;
         this.finish = finish;
