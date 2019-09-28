@@ -45,8 +45,8 @@ public class PointController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    String db_ins(ModelMap modelMap,
-                  String description, double lat, double lon,
+    String db_ins(ModelMap modelMap, String description,
+                  double lat, double lon,
                   int size) {
         pointRepo.saveAndFlush(new Point(description, lat, lon, size));
         return db(modelMap);
