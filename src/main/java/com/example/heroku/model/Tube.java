@@ -18,12 +18,14 @@ public class Tube {
     long start;
     @Column(name = "finish")
     long finish;
-    @Column(name = "id_property")
-    long idProperty;
     @Column(name = "id_owners")
     long idOwners;
     @Column(name = "z_coord")
     float zCoord;
+    int type;
+    int diameter;
+    int thickness;
+    String gost;
     @Column(name = "input_date")
     Date input;
     @Column(name = "output_date")
@@ -39,11 +41,19 @@ public class Tube {
     public Tube() {
     }
 
-    public Tube(long start, long finish, float zCoord, long idProperty, long idOwners) {
+    public Tube(long start, long finish, float zCoord, long idOwners) {
         this.start = start;
         this.finish = finish;
         this.zCoord = zCoord;
-        this.idProperty = idProperty;
+        this.idOwners = idOwners;
+        this.input = new Date();
+        this.output = new Date();
+    }
+    public Tube(long start, long finish, float zCoord, int type, long idOwners) {
+        this.start = start;
+        this.finish = finish;
+        this.zCoord = zCoord;
+        this.type = type;
         this.idOwners = idOwners;
         this.input = new Date();
         this.output = new Date();
@@ -97,14 +107,6 @@ public class Tube {
         this.output = output;
     }
 
-    public long getIdProperty() {
-        return idProperty;
-    }
-
-    public void setIdProperty(long idProperty) {
-        this.idProperty = idProperty;
-    }
-
     public long getIdOwners() {
         return idOwners;
     }
@@ -135,5 +137,37 @@ public class Tube {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getDiameter() {
+        return diameter;
+    }
+
+    public void setDiameter(int diameter) {
+        this.diameter = diameter;
+    }
+
+    public int getThickness() {
+        return thickness;
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
+    }
+
+    public String getGost() {
+        return gost;
+    }
+
+    public void setGost(String gost) {
+        this.gost = gost;
     }
 }

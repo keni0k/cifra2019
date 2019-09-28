@@ -69,12 +69,12 @@ public class TubeController {
                    double p2_lat, double p2_lon,
                    int size1, int size2,
                    String desc1, String desc2,
-                   float z_coord, long id_property, long id_owners){
+                   float z_coord, long id_owners){
         Point p1 = new Point(desc1,p1_lat, p1_lon, size1);
         Point p2 = new Point(desc2,p2_lat, p2_lon, size2);
         pointRepo.save(p1);
         pointRepo.save(p2);
-        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_property, id_owners);
+        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners);
         tubeRepo.save(tube);
         return "OK";
     }
@@ -82,9 +82,9 @@ public class TubeController {
     @RequestMapping(method = RequestMethod.POST)
     String db_ins(ModelMap modelMap,
                   long start, long finish,
-                  float z_coord, long id_property, long id_owners) {
+                  float z_coord, int type, long id_owners) {
         tubeRepo.saveAndFlush(new Tube(start,
-                finish, z_coord, id_property, id_owners));
+                finish, z_coord, type, id_owners));
         return db(modelMap);
     }
 
@@ -101,7 +101,7 @@ public class TubeController {
                    @RequestParam(value = "start", required=false) Integer start,
                    @RequestParam(value = "finish", required=false) Integer finish,
                    @RequestParam(value = "z_coord", required=false) Float z_coord,
-                   @RequestParam(value = "id_property", required=false) Long id_property,
+                   @RequestParam(value = "type", required=false) Integer type,
                    @RequestParam(value = "id_owners", required=false) Long id_owners) {
         Tube tube = tubeRepo.getTubeById(id);
         if (start != null)
@@ -110,8 +110,8 @@ public class TubeController {
             tube.setFinish(finish);
         if (z_coord != null)
             tube.setzCoord(z_coord);
-        if (id_property != null)
-            tube.setIdProperty(id_property);
+        if (type != null)
+            tube.setType(type);
         if (id_owners != null)
             tube.setIdOwners(id_owners);
         //todo: rasshirit
@@ -126,6 +126,17 @@ public class TubeController {
         modelMap.addAttribute("tube_ed", tubeRepo.getTubeById(id));
         modelMap.addAttribute("tubes", tubeRepo.findAll());
         modelMap.addAttribute("points", pointRepo.findAll());
+        return "db";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    String update(ModelMap modelMap) {
+        for (Tube tube : tubeRepo.findAll()){
+            tube.setType(0);
+            tube.setDiameter(100);
+            tube.setGost("ГОСТ 3262-75");
+            tube.setThickness(10);
+        }
         return "db";
     }
 
