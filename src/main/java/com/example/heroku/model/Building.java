@@ -9,9 +9,11 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(appliesTo = "building")
 public class Building {
+
+    public Building(){}
+
     public Building(String address, int type, long topLeft, long botRight, long topRight, long botLeft, int peopleCount, Date created, Date capitalFix) {
         this.type = type;
         this.address = address;
