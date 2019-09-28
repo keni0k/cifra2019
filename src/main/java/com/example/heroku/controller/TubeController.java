@@ -136,6 +136,7 @@ public class TubeController {
             tube.setDiameter(100);
             tube.setGost("ГОСТ 3262-75");
             tube.setThickness(10);
+            tubeRepo.save(tube);
         }
         return "db";
     }

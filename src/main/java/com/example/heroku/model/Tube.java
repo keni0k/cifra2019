@@ -22,10 +22,10 @@ public class Tube {
     long idOwners;
     @Column(name = "z_coord")
     float zCoord;
-    int type;
-    int diameter;
-    int thickness;
-    String gost;
+    int type = 0;
+    int diameter = 100;
+    int thickness = 10;
+    String gost = "";
     @Column(name = "input_date")
     Date input;
     @Column(name = "output_date")
