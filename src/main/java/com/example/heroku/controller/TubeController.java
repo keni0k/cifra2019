@@ -36,7 +36,11 @@ public class TubeController {
         modelMap.addAttribute("tube_ed", new Tube());
         modelMap.addAttribute("points", pointRepo.findAll());
 //        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
-        modelMap.addAttribute("tubes", tubeRepo.findAll());
+        List<Tube> tubes = tubeRepo.findAll();
+        tubes.forEach(tube -> tube.setStartPoint(pointRepo.getPointById(tube.getStart())));
+        tubes.forEach(tube -> tube.setEndPoint(pointRepo.getPointById(tube.getFinish())));
+        modelMap.addAttribute("tubes", tubes);
+
         return "db";
     }
 
@@ -64,6 +68,7 @@ public class TubeController {
     }
 
     @RequestMapping(value = "/with_points", method = RequestMethod.POST)
+    @ResponseBody
     String dbs_ins(ModelMap modelMap,
                    double p1_lat, double p1_lon,
                    double p2_lat, double p2_lon,
