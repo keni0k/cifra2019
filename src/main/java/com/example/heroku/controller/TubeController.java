@@ -100,8 +100,8 @@ public class TubeController {
         return db(modelMap);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    String db_ins(ModelMap modelMap,
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    String db_ins1(ModelMap modelMap,
                   long start, long finish,
                   float z_coord, int type, long id_owners) {
         tubeRepo.saveAndFlush(new Tube(start,

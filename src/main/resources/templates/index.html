@@ -1,61 +1,230 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
-
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Archimed</title>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/vue.js"></script>
+	<script src="js/main.js"></script>    
+</head>
 <body>
+    <div id="app">
+        <div id="menu-top">
+<!--            <div class="container-flex">-->
+                <div class="logo">ARCHIMED</div>
+                <div class="right-panel">
+                    <div class="search menu-item">
+                        <button>Найти</button>
+                    </div>
+                    <div class="link menu-item">
+                        <div class="splitter"></div>
+                        <a href="#">Тех.поддержка</a>
+                    </div>
+                    <div class="account menu-item">
+                            <div class="splitter"></div>
+                            <div class="text">Участок №3</div>
+                        <div class="img"><img src="img/avatar.png" alt="Участок №3"></div>
+                    </div>
+                </div>
+                
+<!--            </div>-->
+        </div>
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img alt="Logo" src="/lang-logo.png">
-    </a>
-    <h1>Getting Started with Gradle on Heroku</h1>
-    <p>This is a sample Gradle application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-gradle-on-heroku"><span class="glyphicon glyphicon-flash"></span> Getting Started with Gradle</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/gradle-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-gradle-on-heroku" class="alert-link">Getting Started with Gradle on Heroku</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/gradle-getting-started">Heroku Button</a> on the repository.</li>
+        <div id="left-panel">
+            <ul class="accordion-menu">
+                <li class="open" v-on:click="onClickMap">
+                    <div class="dropdownlink">
+                        <div class="icon icon-map"></div>
+                        <div class="text">Карта</div>
+                    </div>
+                    <ul class="submenuItems" id="typeMap" style="display: block;">
+                        <li v-on:click="onClickTypeMap" class="active"><a class="radiobtn radiobtn1" href="#">Водоснабжение</a></li>
+                        <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn2" href="#">Водоотведение</a></li>
+                        <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn3" href="#">Теплоснабжение</a></li>
+                        <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn4" href="#">Канализация</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdownlink">
+                        <div class="icon icon-fragment"></div>
+                        <div class="text">Фрагмент</div>
+                    </div>
+                    <ul class="submenuItems">
+                    <li><a href="#" class="active">Схема</a></li>
+                    <li><a href="#" v-on:click="onClickSupport">Информация</a></li>
+                    <li><a href="#">История правок</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdownlink">
+                        <div class="icon icon-calendar"></div>
+                        <div class="text">Календарь</div>
+                    </div>
+                    <ul class="submenuItems">
+                    <li><a href="#">Здесь календарь</a></li>
+                    </ul>
+                </li>
+                <div class="btn-support dropdownlink" v-on:click="onClickSupport">
+                    <div class="icon icon-support"></div>
+                    <div class="text">Поддержка</div>
+                </div>
+            </ul>            
+        </div>
 
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/gradle-getting-started/blob/master/pom.xml">pom.xml</a>, creating a slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-      </ul>
+        <div id="modal-dialog">
+            <p id="modal-dialog-head-text">Все данные об инженерных системах на одной платформе</p>
+            
+            <div id="hr-div"></div>
+                
+            <p class="modal-dialog-content-text">Что представляет собой ИИС Архимед?</p><br><br><br>
+            <p class="modal-dialog-content-text">Для кого предназначена система?</p><br><br><br>
+            <p class="modal-dialog-content-text">Какие данные доступны вам в системе?</p><br><br><br>
+            <p class="modal-dialog-content-text">Как внести изменения или добавить информацию?
+            
+            <div class="btn-close"></div>
+            
+            <div id="modal-dialog-content-img">
+                <img src="img/Group_7_6.svg" width="70%">
+            </div>
+            
+        </div>
+        
+        <div id="panel-tools">
+            <div v-on:click="onClickCritical" class="btn-critical">Отобразить крические участки</div>
+            <div class="btn-add-object">+ Добавить объект</div>
+        </div>
+        
+
+        <div id="map"></div>
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-      <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-gradle-on-heroku">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <li>
-          <ul>
-          <li><code>git clone https://github.com/heroku/gradle-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd gradle-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-gradle-on-heroku#push-local-changes">deploy changes</a> to Heroku</li>
-        </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-gradle-on-heroku">Getting Started with Gradle on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-gradle">Deploying Gradle Apps on Heroku</a></li>
-      </ul>
-    </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
+    
+    <script>
+        /*<![CDATA[*/
+        var map;
+        var typeMap = "#61FFF5";
 
+        const app = new Vue({
+            el: '#app',
+            data: {
+                errors: [],
+                name: null,
+                isShowCritical: false
+            },
+            mounted: function () {
+                map = L.map('map', { zoomControl:false
+                }).setView([55.038388736512346, 82.91811079370683],16);
+
+                var osmLayer = new L.TileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap.org</a>'
+                }).addTo(map);
+
+                this.RefreshObjectsOnMap();                
+
+                $(function() {
+                    var Accordion = function(el, multiple) {
+                        this.el = el || {};
+                        this.multiple = multiple || false;
+                        
+                        var dropdownlink = this.el.find('.dropdownlink');
+                        dropdownlink.on('click',
+                            { el: this.el, multiple: this.multiple }, this.dropdown);
+                    };
+                
+                    Accordion.prototype.dropdown = function(e) {
+                        var $el = e.data.el,
+                            $this = $(this),
+                            $next = $this.next();
+                        
+                        if (!$this.parent().hasClass('open'))
+                        {
+                            $next.slideToggle();
+                            $this.parent().toggleClass('open');
+                        }
+
+                        if(!e.data.multiple) {
+                            $el.find('.submenuItems').not($next).slideUp().parent().removeClass('open');
+                        }
+                    };
+                    
+                    var accordion = new Accordion($('.accordion-menu'), false);
+                });                
+            },
+            methods: {
+                onClickSupport: function(e){
+                    var dialog = $("#modal-dialog");
+                    var panel = $("#left-panel");
+                    var body = $("#app");
+                    var height = body.height()-185;
+                    var width = body.width()-panel.width()-100;
+
+                    dialog.width(width);
+                    dialog.css({left:400,top:135,height:height});
+                    dialog.show();
+                    e.preventDefault = false;
+                    map.scrollWheelZoom.disable();
+                    map.dragging.disable();
+                    $("#left-panel .btn-support").addClass('active');
+                },
+                onClickMap: function() {
+                    $("#modal-dialog").hide();
+                    map.scrollWheelZoom.enable();
+                    map.dragging.enable();
+                    $(".dropdownlink .icon-support").parent().removeClass('active');
+                },
+                onClickTypeMap: function(e) {
+                    var childs = $("#typeMap").children();
+                    var el = e.srcElement;
+
+                    Array.from(childs).forEach(function(item){
+                        if (item !== el)
+                            item.classList.remove("active");
+                    });
+
+                    el.parentElement.classList.add("active");
+
+                    if (el.classList.contains("radiobtn1"))
+                        typeMap = "#61FFF5";
+                    else if (el.classList.contains("radiobtn2"))
+                        typeMap = "#77FF95";
+                    else if (el.classList.contains("radiobtn3"))
+                        typeMap = "#B7DCFF";
+                    else if (el.classList.contains("radiobtn4"))
+                        typeMap = "#FECCE4";
+
+                    this.RefreshObjectsOnMap();
+                },
+                onClickCritical: function() {
+                    console.debug(this);
+                    
+                    this.isShowCritical = !this.isShowCritical;
+
+                    var btnCritical = $(".btn-critical");
+                    
+                    if (this.isShowCritical)
+                    {
+                        btnCritical.text("Скрыть критические участки");
+                        btnCritical.addClass("showCritical");
+                    }
+                    else
+                    {
+                        btnCritical.text("Отобразить критические участки");
+                        btnCritical.removeClass("showCritical");
+                    }
+                },
+                RefreshObjectsOnMap: function(){
+                    //var url = 'https://cifra2019.herokuapp.com/tube/json';
+                    var url = 'http://localhost/tube.php';
+                }
+            }
+        });
+        /*]]>*/
+    </script>
 </body>
 </html>
