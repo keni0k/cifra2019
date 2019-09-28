@@ -5,10 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Table;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
+@Entity
 @Table(appliesTo = "building")
 public class Building {
 
@@ -26,6 +31,8 @@ public class Building {
         this.capitalFix = capitalFix;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String address;
     int type;

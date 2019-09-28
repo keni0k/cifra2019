@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
-@Controller
-@RequestMapping("/building")
+//@Controller
+//@RequestMapping("/building")
 public class BuildingController {
 
     private BuildingRepo buildingRepo;
