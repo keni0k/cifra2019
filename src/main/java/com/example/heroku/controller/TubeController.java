@@ -88,10 +88,10 @@ public class TubeController {
                    String gost) {
         Point p1 = new Point(desc1, p1_lat, p1_lon, size1);
         Point p2 = new Point(desc2, p2_lat, p2_lon, size2);
-        pointRepo.save(p1);
-        pointRepo.save(p2);
+        pointRepo.saveAndFlush(p1);
+        pointRepo.saveAndFlush(p2);
         Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners, gost);
-        tubeRepo.save(tube);
+        tubeRepo.saveAndFlush(tube);
         return "OK";
     }
 

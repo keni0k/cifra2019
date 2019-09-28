@@ -309,9 +309,10 @@ html, body, #app, #map {
     background: url('../img/support.png');
 }
 
-#left-panel .icon-calendar {
-    background: url('../img/calendar.png');
+#left-panel .icon-analytica {
+    background: url('../img/analytica.png');
 }
+
 
 #left-panel .dropdownlink i {
     position: absolute;
