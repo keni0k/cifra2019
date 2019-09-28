@@ -90,8 +90,7 @@ public class TubeController {
         Point p2 = new Point(desc2, p2_lat, p2_lon, size2);
         p1 = pointRepo.saveAndFlush(p1);
         p2 = pointRepo.saveAndFlush(p2);
-        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners, gost);
-        tubeRepo.saveAndFlush(tube);
+        tubeRepo.saveAndFlush(new Tube(p1.getId(), p2.getId(), z_coord, id_owners, gost));
         return "OK";
     }
 
