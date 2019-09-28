@@ -1,5 +1,6 @@
 package com.example.heroku.controller;
 
+import com.example.heroku.model.Point;
 import com.example.heroku.model.Tube;
 import com.example.heroku.repo.PointRepo;
 import com.example.heroku.repo.TubeRepo;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
@@ -61,6 +63,22 @@ public class TubeController {
         return "null";
     }
 
+    @RequestMapping(value = "/with_points", method = RequestMethod.POST)
+    String dbs_ins(ModelMap modelMap,
+                   double p1_lat, double p1_lon,
+                   double p2_lat, double p2_lon,
+                   int size1, int size2,
+                   String desc1, String desc2,
+                   float z_coord, long id_property, long id_owners){
+        Point p1 = new Point(desc1,p1_lat, p1_lon, size1);
+        Point p2 = new Point(desc2,p2_lat, p2_lon, size2);
+        pointRepo.save(p1);
+        pointRepo.save(p2);
+        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_property, id_owners);
+        tubeRepo.save(tube);
+        return "OK";
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     String db_ins(ModelMap modelMap,
                   long start, long finish,
@@ -78,9 +96,13 @@ public class TubeController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    String db_edit(ModelMap modelMap, Long id,
-                   Integer start, Integer finish,
-                   Float z_coord, Long id_property, Long id_owners) {
+    String db_edit(ModelMap modelMap,
+                   @RequestParam(value = "id", required=false) Long id,
+                   @RequestParam(value = "start", required=false) Integer start,
+                   @RequestParam(value = "finish", required=false) Integer finish,
+                   @RequestParam(value = "z_coord", required=false) Float z_coord,
+                   @RequestParam(value = "id_property", required=false) Long id_property,
+                   @RequestParam(value = "id_owners", required=false) Long id_owners) {
         Tube tube = tubeRepo.getTubeById(id);
         if (start != null)
             tube.setStart(start);
