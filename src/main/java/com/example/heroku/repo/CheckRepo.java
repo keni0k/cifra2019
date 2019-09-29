@@ -10,6 +10,5 @@ import java.util.List;
 public interface CheckRepo extends JpaRepository<Check, Long> {
 
     Check getCheckById(long id);
-    List<Check> getChecksByUserId(long userId);
 
 }

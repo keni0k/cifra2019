@@ -8,9 +8,14 @@ import javax.persistence.*;
 @Table(appliesTo = "check")
 public class Check {
 
+    public Check(){}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    public long getId() {
+        return id;
+    }
 
     private int type;
     private long userId;

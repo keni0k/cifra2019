@@ -23,7 +23,8 @@ public class CheckController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     String db(ModelMap modelMap, long user_id) {
-        List<Check> checks = checkRepo.getChecksByUserId(user_id);
+        List<Check> checks = checkRepo.findAll();
+        checks.removeIf(check -> check.getUserId()!=user_id);
         StringBuilder stringBuilder = new StringBuilder();
         for (Check check:checks){
             stringBuilder.append(check.getObjId());
