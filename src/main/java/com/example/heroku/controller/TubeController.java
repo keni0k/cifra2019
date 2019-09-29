@@ -98,13 +98,14 @@ public class TubeController {
         return "OK";
     }
 
-    @RequestMapping(value = "/add2", method = RequestMethod.GET)
+    @RequestMapping(value = "/add2", method = RequestMethod.POST)
     @ResponseBody
     String dbs_ins2(ModelMap modelMap,
-                    float p1_lat, float p1_lon,
-                    float p2_lat, float p2_lon){
-        Point p1 = new Point("desc1", p1_lat, p1_lon, 1);
-        Point p2 = new Point("desc2", p2_lat, p2_lon, 1);
+                    @RequestParam(value = "p1_lat")
+                    String p1_lat, @RequestParam(value = "p1_lon")String p1_lon,
+                    @RequestParam(value = "p2_lat")String p2_lat, @RequestParam(value = "p2_lon")String p2_lon){
+        Point p1 = new Point("desc1", Float.parseFloat(p1_lat), Float.parseFloat(p1_lon), 1);
+        Point p2 = new Point("desc2", Float.parseFloat(p2_lat), Float.parseFloat(p2_lon), 1);
         p1 = pointRepo.saveAndFlush(p1);
         p2 = pointRepo.saveAndFlush(p2);
         Tube tube = new Tube(p1.getId(), p2.getId(), 1, 1, "gost");

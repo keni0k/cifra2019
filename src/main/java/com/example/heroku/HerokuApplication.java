@@ -16,7 +16,6 @@
 
 package com.example.heroku;
 
-import com.example.heroku.utils.security.SecurityConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +28,6 @@ import org.springframework.context.annotation.Import;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-@Import({SecurityConfig.class })
 public class HerokuApplication {
 
     @Value("${spring.datasource.url}")
