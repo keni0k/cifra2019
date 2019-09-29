@@ -80,11 +80,33 @@ public class TubeController {
     @RequestMapping(value = "/add_with_2_points", method = RequestMethod.POST)
     @ResponseBody
     String dbs_ins(ModelMap modelMap,
-                   double p1_lat, double p1_lon,
-                   double p2_lat, double p2_lon,
-                   int size1, int size2,
+                   Double p1_lat, Double p1_lon,
+                   Double p2_lat, Double p2_lon,
+                   Integer size1, Integer size2,
                    String desc1, String desc2,
-                   float z_coord, long id_owners,
+                   Float z_coord, Long id_owners,
+                   String gost,
+                   @RequestParam(value = "name", required = false) String name,
+                   @RequestParam(value = "comment", required = false) String comment) {
+        Point p1 = new Point(desc1, p1_lat, p1_lon, size1);
+        Point p2 = new Point(desc2, p2_lat, p2_lon, size2);
+        p1 = pointRepo.saveAndFlush(p1);
+        p2 = pointRepo.saveAndFlush(p2);
+        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners, gost);
+        tube.setName(name);
+        tube.setComment(comment);
+        tubeRepo.saveAndFlush(tube);
+        return "OK";
+    }
+
+    @RequestMapping(value = "/with_points", method = RequestMethod.POST)
+    @ResponseBody
+    String dbs_ins2(ModelMap modelMap,
+                   Double p1_lat, Double p1_lon,
+                   Double p2_lat, Double p2_lon,
+                   Integer size1, Integer size2,
+                   String desc1, String desc2,
+                   Float z_coord, Long id_owners,
                    String gost,
                    @RequestParam(value = "name", required = false) String name,
                    @RequestParam(value = "comment", required = false) String comment) {
