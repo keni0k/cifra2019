@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -127,7 +128,9 @@ public class TubeController {
                    @RequestParam(value = "finish", required = false) Long finish,
                    @RequestParam(value = "z_coord", required = false) Float z_coord,
                    @RequestParam(value = "type", required = false) Integer type,
-                   @RequestParam(value = "id_owners", required = false) Long id_owners) {
+                   @RequestParam(value = "id_owners", required = false) Long id_owners,
+                   @RequestParam(value = "fix_after", required = false) Integer years,
+                   @RequestParam(value = "need_fix", required = false) Boolean fix) {
         Tube tube = tubeRepo.getTubeById(id);
         if (start != null)
             tube.setStart(start);
@@ -139,6 +142,16 @@ public class TubeController {
             tube.setType(type);
         if (id_owners != null)
             tube.setIdOwners(id_owners);
+        if (years != null) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date());
+            c.add(Calendar.YEAR, years);
+            tube.setInput(new Date());
+            tube.setOutput(c.getTime());
+        }
+        if (fix != null) {
+            tube.setOutput(new Date());
+        }
         //todo: rasshirit
         tubeRepo.save(tube);
         return "redirect:/tube/";
