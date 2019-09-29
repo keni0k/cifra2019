@@ -42,7 +42,6 @@ public class TubeController {
         tubes.forEach(tube -> tube.setStartPoint(pointRepo.getPointById(tube.getStart())));
         tubes.forEach(tube -> tube.setEndPoint(pointRepo.getPointById(tube.getFinish())));
         modelMap.addAttribute("tubes", tubes);
-
         return "db";
     }
 
