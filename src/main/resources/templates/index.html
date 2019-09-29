@@ -488,8 +488,6 @@
                 onClickCreateObject: function() {
                     var point1 = $("#BeginPoint").val();
                     var point2 = $("#EndPoint").val();
-                    var name = $("#NameObject").val();
-                    var comment = $("#Comment").val();
                     var isCritical = $("#IsCritical").is(':checked');
 
                     var lat1 = point1.slice(1,point1.indexOf(";"));
@@ -497,22 +495,13 @@
                     var lat2 = point2.slice(1,point2.indexOf(";"));
                     var lon2 = point2.slice(point2.indexOf(";")+2, point2.length-1);
 
-                    var url = '/tube/add_with_2_points';
+                    var url = '/tube/add2';
 
-                    axios.post(url, {
-                                p1_lat: lat1,
-                                p1_lon: lon1,
-                                p2_lat: lat2,
-                                p2_lon: lon2,
-                                size1: 1,
-                                size2: 1,
-                                desc1: "",
-                                desc2: "",
-                                z_coord: 0, 
-                                id_owners: 0,
-                                gost: "",
-                                name: name,
-                                comment: comment
+                    axios.get(url, {
+                                p1_lat: parseFloat(lat1),
+                                p1_lon: parseFloat(lon1),
+                                p2_lat: parseFloat(lat2),
+                                p2_lon: parseFloat(lon2)
                             })
                          .then((response) => {
                             var typeColor;
