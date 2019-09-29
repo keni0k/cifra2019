@@ -149,7 +149,7 @@ public class TubeController {
             tube.setInput(new Date());
             tube.setOutput(c.getTime());
         }
-        if (fix != null) {
+        if (fix != null && fix) {
             tube.setOutput(new Date());
         }
         //todo: rasshirit
