@@ -77,7 +77,7 @@ public class TubeController {
         return "null";
     }
 
-    @RequestMapping(value = "/with_points", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_with_2_points", method = RequestMethod.POST)
     @ResponseBody
     String dbs_ins(ModelMap modelMap,
                    double p1_lat, double p1_lon,
