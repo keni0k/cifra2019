@@ -79,8 +79,7 @@ public class TubeController {
 
     @RequestMapping(value = "/add_with_2_points", method = RequestMethod.POST)
     @ResponseBody
-    String dbs_ins(ModelMap modelMap,
-                   Double p1_lat, Double p1_lon,
+    String dbs_ins(Double p1_lat, Double p1_lon,
                    Double p2_lat, Double p2_lon,
                    Integer size1, Integer size2,
                    String desc1, String desc2,
@@ -88,6 +87,7 @@ public class TubeController {
                    String gost,
                    @RequestParam(value = "name", required = false) String name,
                    @RequestParam(value = "comment", required = false) String comment) {
+//        return ""+p1_lat;
         Point p1 = new Point(desc1, p1_lat, p1_lon, size1);
         Point p2 = new Point(desc2, p2_lat, p2_lon, size2);
         p1 = pointRepo.saveAndFlush(p1);

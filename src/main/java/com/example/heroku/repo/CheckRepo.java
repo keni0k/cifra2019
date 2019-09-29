@@ -1,14 +1,12 @@
 package com.example.heroku.repo;
 
-import com.example.heroku.model.Check;
+import com.example.heroku.model.Check1;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface CheckRepo extends JpaRepository<Check, Long> {
+public interface CheckRepo extends JpaRepository<Check1, Long> {
 
-    Check getCheckById(long id);
+    Check1 getCheckById(long id);
 
 }

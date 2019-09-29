@@ -5,10 +5,10 @@ import org.hibernate.annotations.Table;
 import javax.persistence.*;
 
 @Entity
-@Table(appliesTo = "check")
-public class Check {
+@Table(appliesTo = "check1")
+public class Check1 {
 
-    public Check(){}
+    public Check1(){}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,10 +20,10 @@ public class Check {
     private int type;
     private long userId;
     private long objId;
-    private boolean checked;
-    private boolean visited;
+    private Boolean checked;
+    private Boolean visited;
 
-    public Check(long userId, long objId) {
+    public Check1(long userId, long objId) {
         this.userId = userId;
         this.objId = objId;
         checked = false;

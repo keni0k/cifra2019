@@ -1,6 +1,6 @@
 package com.example.heroku.controller;
 
-import com.example.heroku.model.Check;
+import com.example.heroku.model.Check1;
 import com.example.heroku.repo.CheckRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,11 +23,11 @@ public class CheckController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     String db(ModelMap modelMap, long user_id) {
-        List<Check> checks = checkRepo.findAll();
-        checks.removeIf(check -> check.getUserId()!=user_id);
+        List<Check1> check1s = checkRepo.findAll();
+        check1s.removeIf(check1 -> check1.getUserId()!=user_id);
         StringBuilder stringBuilder = new StringBuilder();
-        for (Check check:checks){
-            stringBuilder.append(check.getObjId());
+        for (Check1 check1 : check1s){
+            stringBuilder.append(check1.getObjId());
             stringBuilder.append("_");
         }
         return stringBuilder.toString();
@@ -36,14 +36,14 @@ public class CheckController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     String add_check(ModelMap modelMap, long user_id, long obj_id) {
-        checkRepo.saveAndFlush(new Check(user_id, obj_id));
+        checkRepo.saveAndFlush(new Check1(user_id, obj_id));
         return "OK";
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     @ResponseBody
     String set_check(ModelMap modelMap, long id, boolean check) {
-        Check check1 = checkRepo.getCheckById(id);
+        Check1 check1 = checkRepo.getCheckById(id);
         check1.setChecked(check);
         check1.setVisited(true);
         checkRepo.saveAndFlush(check1);
