@@ -286,10 +286,10 @@
                     var url = '/tube/add_with_2_points';
 
                     axios.post(url, {
-                                p1_lat: lat1,
-                                p1_lon: lon1,
-                                p2_lat: lat2,
-                                p2_lon: lon2,
+                                p1_lat: parseFloat(lat1),
+                                p1_lon: parseFloat(lon1),
+                                p2_lat: parseFloat(lat2),
+                                p2_lon: parseFloat(lon2),
                                 size1: 1,
                                 size2: 1,
                                 desc1: "",
