@@ -31,6 +31,11 @@ public class Tube {
     int thickness;
     @Column(name = "gost")
     String gost = "";
+
+    @Column(name = "name")
+    String name = "";
+    @Column(name = "comment")
+    String comment = "";
     @Column(name = "input_date")
     Date input;
     @Column(name = "output_date")
@@ -96,6 +101,22 @@ public class Tube {
 
     public long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public void setId(long id) {

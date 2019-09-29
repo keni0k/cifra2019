@@ -85,12 +85,17 @@ public class TubeController {
                    int size1, int size2,
                    String desc1, String desc2,
                    float z_coord, long id_owners,
-                   String gost) {
+                   String gost,
+                   @RequestParam(value = "name", required = false) String name,
+                   @RequestParam(value = "comment", required = false) String comment) {
         Point p1 = new Point(desc1, p1_lat, p1_lon, size1);
         Point p2 = new Point(desc2, p2_lat, p2_lon, size2);
         p1 = pointRepo.saveAndFlush(p1);
         p2 = pointRepo.saveAndFlush(p2);
-        tubeRepo.saveAndFlush(new Tube(p1.getId(), p2.getId(), z_coord, id_owners, gost));
+        Tube tube = new Tube(p1.getId(), p2.getId(), z_coord, id_owners, gost);
+        tube.setName(name);
+        tube.setComment(comment);
+        tubeRepo.saveAndFlush(tube);
         return "OK";
     }
 
@@ -122,7 +127,7 @@ public class TubeController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String db_edit(ModelMap modelMap,
-                   @RequestParam(value = "id", required = false) Long id,
+                   @RequestParam(value = "id") Long id,
                    @RequestParam(value = "start", required = false) Long start,
                    @RequestParam(value = "finish", required = false) Long finish,
                    @RequestParam(value = "z_coord", required = false) Float z_coord,
@@ -151,7 +156,6 @@ public class TubeController {
         if (fix != null && fix) {
             tube.setOutput(new Date());
         }
-        //todo: rasshirit
         tubeRepo.save(tube);
         return "redirect:/tube/";
     }
