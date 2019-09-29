@@ -6,13 +6,13 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
-    <link rel="stylesheet" href="/css/leaflet.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/leaflet.js"></script>
-    <script src="/js/vue.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/main.js"></script>      
 </head>
 <body>
     <div id="app">
@@ -24,13 +24,11 @@
                         <button>Найти</button>
                     </div>
                     <div class="link menu-item">
-                        <div class="splitter">&nbsp;</div>
                         <a href="#">Тех.поддержка</a>
                     </div>
                     <div class="account menu-item">
-                        <div class="splitter">&nbsp;</div>
                         <div class="text">Участок №3</div>
-                        <div class="img"><img src="/img/avatar.png" alt="Участок №3"></div>
+                        <div class="img"><img src="img/avatar.png" alt="Участок №3"></div>
                     </div>
                 </div>
                 
@@ -48,7 +46,6 @@
                         <li v-on:click="onClickTypeMap" class="active"><a class="radiobtn radiobtn1" href="#">Водоснабжение</a></li>
                         <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn2" href="#">Водоотведение</a></li>
                         <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn3" href="#">Теплоснабжение</a></li>
-                        <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn4" href="#">Канализация</a></li>
                     </ul>
                 </li>
                 <li>
@@ -62,20 +59,15 @@
                     <li><a href="#">История правок</a></li>
                     </ul>
                 </li>
-                <li>
-                    <div class="dropdownlink">
-                        <div class="icon icon-calendar"></div>
-                        <div class="text">Календарь</div>
-                    </div>
-                    <ul class="submenuItems">
-                    <li><a href="#">Здесь календарь</a></li>
-                    </ul>
-                </li>
-                <div class="btn-support dropdownlink" v-on:click="onClickSupport">
-                    <div class="icon icon-support"></div>
-                    <div class="text">Поддержка</div>
-                </div>
             </ul>            
+            <div class="btn-analitika dropdownlink" v-on:click="onClickAnalitika">
+                <div class="icon icon-analitika"></div>
+                <div class="text">Аналитика</div>
+            </div>
+            <div class="btn-support dropdownlink" v-on:click="onClickSupport">
+                <div class="icon icon-support"></div>
+                <div class="text">Поддержка</div>
+            </div>
         </div>
 
         <div id="modal-dialog">
@@ -91,11 +83,22 @@
             <div class="btn-close"></div>
             
             <div id="modal-dialog-content-img">
-                <img src="/img/Group_7_6.svg" width="70%">
+                <img src="img/Group_7_6.svg" width="70%">
             </div>
             
         </div>
-        
+
+        <div id="modal-dialog2">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div id="he-text"><p id="he-txt">Информация</p></div>
+                <div class="analitika-template"></div>
+        </div>        
+
         <div id="panel-tools">
             <div v-on:click="onClickCritical" class="btn-critical">Отобразить крические участки</div>
             <div v-on:click="onClickAddObject" class="btn-add-object">+ Добавить объект</div>
@@ -131,7 +134,7 @@
             <br>
             <p class="modal-info-text">Глобальные координаты:</p><br>
             <p class="modal-info-text">55.0394832, 82.9153633</p>
-            <img id="quest-img" src="/img/Group%204.22.svg">
+            <img id="quest-img" src="img/Group%204.22.svg">
             <div id="he-text"><p id="he-txt">Информация</p></div>
             <p class="modal-info-text">54.0395672, 81.4654563</p>
             <br>
@@ -155,8 +158,8 @@
                     <div class="div-tab">
                         
                         <p class="tab-text">Снимки</p>
-                        <img src="/img/image%203.png" width="10%">
-                        <img src="/img/image%202.png" width="10%">
+                        <img src="img/image%203.png" width="10%">
+                        <img src="img/image%202.png" width="10%">
                     </div>
                     <p class="tab-text">Харакеристики</p>
                     <div class="inp-divs">
@@ -176,11 +179,11 @@
                     </div>
                 </section>  
                 <section id="content-tab2">
-                    <img src="/img/Group%20110.svg" width="38%" style="position: absolute; margin-left: 390px; width: 300px;">
+                    <img src="img/Group%20110.svg" width="38%" style="position: absolute; margin-left: 390px; width: 300px;">
                     <p class="tab-text">Ремонтные работы</p>
                     <p class="tab-grey-text">Плановый ремонт</p>
-                    <img src="/img/image%205.png" width="10%">
-                        <img src="/img/image%206.png" width="10%">
+                    <img src="img/image%205.png" width="10%">
+                        <img src="img/image%206.png" width="10%">
                     <p class="tab-grey-text">+ Добавить фото</p>
                     <p class="tab-grey-text">/ Изменить данные</p>
                     <p class="tab-grey-text">23.09.19</p>
@@ -196,7 +199,7 @@
                     <p class="tab-text">Выявленные дефекты:</p>
                     <p class="tab-grey-text">23.10.19</p>
                     <p class="tab-grey-text">*Повреждение вентеля*</p>
-                    <img src="/img/image%208.png" width="50%" style="margin-left: 23%">
+                    <img src="img/image%208.png" width="50%" style="margin-left: 23%">
                     <p class="tab-text">Развернуть описание</p>
                     <p class="tab-grey-text">Изменить данные</p>
                     <center><p class="tab-text">Смотреть дальше</p></center>
@@ -381,6 +384,8 @@
             },
             methods: {
                 onClickSupport: function(e){
+                    $("#modal-dialog2").hide();
+                    $("#modal-info").hide();
                     var dialog = $("#modal-dialog");
                     var panel = $("#left-panel");
                     var body = $("#app");
@@ -411,6 +416,8 @@
                 }, 
                 onClickMap: function() {
                     $("#modal-dialog").hide();
+                    $("#modal-dialog2").hide();
+                    $("#modal-info").hide();
                     map.scrollWheelZoom.enable();
                     map.dragging.enable();
                     $(".dropdownlink .icon-support").parent().removeClass('active');
@@ -488,6 +495,8 @@
                 onClickCreateObject: function() {
                     var point1 = $("#BeginPoint").val();
                     var point2 = $("#EndPoint").val();
+                    var name = $("#NameObject").val();
+                    var comment = $("#Comment").val();
                     var isCritical = $("#IsCritical").is(':checked');
 
                     var lat1 = point1.slice(1,point1.indexOf(";"));
@@ -495,14 +504,15 @@
                     var lat2 = point2.slice(1,point2.indexOf(";"));
                     var lon2 = point2.slice(point2.indexOf(";")+2, point2.length-1);
 
-                    var url = 'https://cifra2019.herokuapp.com/tube/add2';
+                    var url = '/tube/add2';
+
                     axios.post(url, {
-                                p1_lat: parseFloat(lat1),
-                                p1_lon: parseFloat(lon1),
-                                p2_lat: parseFloat(lat2),
-                                p2_lon: parseFloat(lon2)
+                                p1_lat: lat1,
+                                p1_lon: lon1,
+                                p2_lat: lat2,
+                                p2_lon: lon2
                             })
-                         .then(function(response) {
+                         .then(function(response){
                             var typeColor;
                             
                             if (this.type == 0)
@@ -549,6 +559,23 @@
 
                     $(".NewObjectDialog").hide();
                 },
+                onClickAnalitika: function() {
+                    $("#modal-dialog").hide();
+                    $("#modal-info").hide();
+                    var dialog = $("#modal-dialog2");
+                    var panel = $("#left-panel");
+                    var body = $("#app");
+                    var height = body.height()-135;
+                    var width = body.width()-panel.width()-100;
+
+                    dialog.width(width);
+                    dialog.css({left:400,top:135,height:height});
+                    dialog.show();
+                    e.preventDefault = false;
+                    map.scrollWheelZoom.disable();
+                    map.dragging.disable();
+                    $("#left-panel .btn-analitika").addClass('active');
+                },
                 ShowAddDialog: function(p1, p2) {
                     $("#BeginPoint").val('('+p1.lat+'; '+p1.lng+')');
                     $("#EndPoint").val('('+p2.lat+'; '+p2.lng+')');
@@ -559,7 +586,7 @@
                     // var url = 'http://localhost/tube.php';
 
                     axios.get(url)
-                        .then(function(response) {
+                        .then(function(response){
                             var typeColor;
                             
                             if (this.type == 0)

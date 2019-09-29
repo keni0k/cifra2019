@@ -53,11 +53,13 @@ table {
     border: 1px solid #FFFFFF;
     
 }
-#modal-dialog-content-img{
+#modal-dialog-content-img,
+#modal-dialog2-content-img{
     margin-left: 55%;
     margin-top: 7%;
 }
-#modal-dialog-head-text{
+#modal-dialog-head-text,
+#modal-dialog2-head-text{
     margin-left: 10%;
     margin-top: 5%;
     color: white;
@@ -71,7 +73,8 @@ table {
     line-height: 56px;
     text-align: center;
 }
-.modal-dialog-content-text{
+.modal-dialog-content-text,
+.modal-dialog2-content-text{
     margin-top: 23%;
     margin-left: 8%;
     color: white;
@@ -164,27 +167,19 @@ html, body, #app, #map {
     margin-top: -25px;
     margin-bottom: -40px;
 }
-#he-text{
-    position: absolute;
-    margin-top: -4%;
-    width: 365px;
-    height: 60px;
-    margin-left: 60%;
-    background: linear-gradient(270deg, #D1FF4E 6.81%, rgba(11, 12, 28, 0) 87.17%);
-}
 
 
 
 
 
-/* Базовый контейнер табов */
+/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ */
 .tabs {
 	min-width: 320px;
 	max-width: 800px;
 	padding: 0px;
 	margin: 0 auto;
 }
-/* Стили секций с содержанием */
+/* пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 .tabs>section {
 	display: none;
 	padding: 15px;
@@ -195,7 +190,7 @@ html, body, #app, #map {
 	margin: 0 0 5px;
 	line-height: 1.5;
 	color: #383838;
-	/* прикрутим анимацию */
+	/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 	-webkit-animation-duration: 1s;
 	animation-duration: 1s;
 	-webkit-animation-fill-mode: both;
@@ -203,7 +198,7 @@ html, body, #app, #map {
 	-webkit-animation-name: fadeIn;
 	animation-name: fadeIn;
 }
-/* Описываем анимацию свойства opacity */
+/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ opacity */
  
 @-webkit-keyframes fadeIn {
 	from {
@@ -221,12 +216,12 @@ html, body, #app, #map {
 		opacity: 1;
 	}
 }
-/* Прячем чекбоксы */
+/* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 .tabs>input {
 	display: none;
 	position: absolute;
 }
-/* Стили переключателей вкладок (табов) */
+/* пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ) */
 .tabs>label {
 	display: inline-block;
 	margin: 0 0 -1px;
@@ -239,7 +234,7 @@ html, body, #app, #map {
 	background: #f1f1f1;
 	border-radius: 3px 3px 0 0;
 }
-/* Шрифт-иконки от Font Awesome в формате Unicode */
+/* пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Font Awesome пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Unicode */
 .tabs>label:before {
 	font-family: fontawesome;
 	font-weight: normal;
@@ -257,25 +252,25 @@ html, body, #app, #map {
 .tabs>label[for*="4"]:before {
 	content: "\f13c";
 }
-/* Изменения стиля переключателей вкладок при наведении */
+/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
  
 .tabs>label:hover {
 	color: #888;
 	cursor: pointer;
 }
-/* Стили для активной вкладки */
+/* пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 .tabs>input:checked+label {
 	color: #555;
 	border-top: 1px solid #009933;
 	border-bottom: 1px solid #fff;
 	background: #fff;
 }
-/* Активация секций с помощью псевдокласса :checked */
+/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ :checked */
 #tab1:checked~#content-tab1, #tab2:checked~#content-tab2, #tab3:checked~#content-tab3, #tab4:checked~#content-tab4 {
 	display: block;
 }
-/* Убираем текст с переключателей 
-* и оставляем иконки на малых экранах
+/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+* пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 */
  
 @media screen and (max-width: 680px) {
@@ -287,8 +282,8 @@ html, body, #app, #map {
 		font-size: 18px;
 	}
 }
-/* Изменяем внутренние отступы 
-*  переключателей для малых экранов
+/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+*  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 */
 @media screen and (max-width: 400px) {
 	.tabs>label {
@@ -297,28 +292,15 @@ html, body, #app, #map {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 .tab-grey-text{
-
-font-family: Roboto;
-font-style: normal;
-font-weight: 500;
-font-size: 17px;
-line-height: 28px;
-
-color: #8E8E8E;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 28px;
+    color: #8E8E8E;
 }
-.inpt-tab{
+.inpt-tab {
     
 display: flex;
 width: 180px;
@@ -329,10 +311,10 @@ margin-top: -3%;
 border: 3px solid #8E8E8E;
 box-sizing: border-box;
 }
-.inp-divs{
+.inp-divs {
     margin-top: 10px;
 }
-.tabs label{
+.tabs label {
     
 font-family: Roboto;
 font-style: normal;
@@ -342,7 +324,7 @@ line-height: 28px;
 
 color: #171932;
 }
-.tab-text{
+.tab-text {
     
     font-family: Roboto;
     font-style: normal;
@@ -352,19 +334,25 @@ color: #171932;
 
     color: #171932;
 }
-#he-txt{
-/*    position: absolute;*/
-        width: 254.84px;
-        height: 36px;
-        margin-left: 30%;
-        margin-top: 2%;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 36px;
-        line-height: 42px;
-
-        color: #FFFFFF;
+#he-text {
+    position: absolute;
+    margin-top: -4%;
+    width: 365px;
+    height: 60px;
+    margin-left: 60%;
+    background: linear-gradient(270deg, #D1FF4E 6.81%, rgba(11, 12, 28, 0) 87.17%);
+}
+#he-txt {
+    width: 254.84px;
+    height: 36px;
+    margin-left: 30%;
+    margin-top: 2%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    color: #FFFFFF;
 }
 .rr{
     padding-left: -30px;
@@ -525,6 +513,11 @@ color: #171932;
     background: url('../img/calendar.png');
 }
 
+#left-panel .icon-analitika {
+    background: url('../img/analitika.png');
+    background-size: 32px 32px;
+}
+
 #left-panel .dropdownlink i {
     position: absolute;
     top: 17px;
@@ -600,6 +593,57 @@ color: #171932;
     background: linear-gradient(270deg, #D1FF4E 10.2%, rgba(188, 229, 73, 0.74) 39.58%, rgba(11, 12, 28, 0) 100%);
 }
 
+#left-panel .btn-support,
+#left-panel .btn-analitika {
+    border-radius: 4px;
+    color: #fff;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 42px;
+    cursor: pointer;
+    display: block;
+    padding: 15px 15px 15px 45px;
+    position: relative;
+    transition: all 0.4s ease-out;
+    height: 50px; 
+    display: flex;
+}
+
+#left-panel .btn-support.open,
+#left-panel .btn-analitika.open {
+    color: #CDDC39;
+    background: #000;
+}
+  
+#left-panel .btn-support.open .fa-chevron-down,
+#left-panel .btn-analitika.open .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+#left-panel .btn-support:last-child,
+#left-panel .btn-analitika:last-child {
+    border-bottom: 0;
+}
+
+#left-panel .btn-support,
+#left-panel .btn-analitika {
+    cursor: pointer;
+    display: block;
+    padding: 15px 15px 15px 45px;
+    position: relative;
+    transition: all 0.4s ease-out;
+    height: 50px; 
+    display: flex;
+}
+
+#left-panel .btn-support:hover,
+#left-panel .btn-analitika:hover {
+    background: #222;
+}
+
+
 #left-panel .btn-support {
     cursor: pointer;
     display: block;
@@ -610,7 +654,8 @@ color: #171932;
     display: flex;
 }
 
-#left-panel .btn-support.active {
+#left-panel .btn-support.active,
+#left-panel .btn-analitika.active {
     background: #000;
 }
 .upper-white-block-text{
@@ -680,7 +725,8 @@ color: #171932;
 }
 
 #modal-info,
-#modal-dialog {
+#modal-dialog,
+#modal-dialog2 {
     display: none;
     width: 100px;
     height: 100px;
@@ -861,4 +907,10 @@ color: #171932;
     left: 500px;
     border-radius: 10px;
     background: linear-gradient(180deg, rgba(23, 25, 50, 0.89) 33.52%, rgba(64, 66, 86, 0.7) 65.72%);
+}
+
+.analitika-template {
+    width: 100%;
+    height: 100%;
+    background: url('/img/analitika-template.png') no-repeat center center;
 }
