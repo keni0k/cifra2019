@@ -7,12 +7,11 @@ import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(appliesTo = "point")
 public class Point {
 
-    public Point() {
-    }
 
     public Point(String description, double lat, double lon, int size) {
         this.description = description;
@@ -36,46 +35,6 @@ public class Point {
 
     @Column(name = "size")
     private int size = 1;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLon() {
-        return lon;
-    }
-
-    public void setLon(double lon) {
-        this.lon = lon;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
 
     public String getCoord(){
         StringBuilder stringBuilder = new StringBuilder();

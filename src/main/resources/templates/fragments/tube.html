@@ -22,7 +22,7 @@
         <tbody>
         <tr th:each="record : ${tubes}">
             <td th:text="${record.getId()}">ID</td>
-            <td th:text="${record.getzCoord()}">Z-coord</td>
+            <td th:text="${record.getZCoord()}">Z-coord</td>
             <td th:text="${record.getStartPoint().getCoord()}">Start</td>
             <td th:text="${record.getEndPoint().getCoord()}">Finish</td>
             <td th:text="${record.getIdOwners()}">owners</td>
@@ -64,7 +64,7 @@
                         <span class="input-group-text" id="basic-addon5">Z-координата</span>
                     </div>
                     <input type="number" name="z_coord" class="form-control input-md"
-                           th:value="${tube_ed.getzCoord()}" step="any"/>
+                           th:value="${tube_ed.getZCoord()}" step="any"/>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

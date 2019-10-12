@@ -1,5 +1,6 @@
 package com.example.heroku.controller;
 
+import com.example.heroku.model.FormTube;
 import com.example.heroku.model.Point;
 import com.example.heroku.model.Tube;
 import com.example.heroku.repo.PointRepo;
@@ -9,10 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -101,16 +99,17 @@ public class TubeController {
     @RequestMapping(value = "/add2", method = RequestMethod.POST)
     @ResponseBody
     String dbs_ins2(ModelMap modelMap,
-                    @RequestParam(value = "p1_lat")
-                    String p1_lat, @RequestParam(value = "p1_lon")String p1_lon,
-                    @RequestParam(value = "p2_lat")String p2_lat, @RequestParam(value = "p2_lon")String p2_lon){
-        Point p1 = new Point("desc1", Float.parseFloat(p1_lat), Float.parseFloat(p1_lon), 1);
-        Point p2 = new Point("desc2", Float.parseFloat(p2_lat), Float.parseFloat(p2_lon), 1);
+                    @RequestBody FormTube formTube){
+        Point p1 = new Point(formTube.getDesc1(), formTube.getP1_lat(), formTube.getP1_lon(), formTube.getSize1());
+        Point p2 = new Point(formTube.getDesc2(), formTube.getP2_lat(), formTube.getP2_lon(), formTube.getSize2());
         p1 = pointRepo.saveAndFlush(p1);
         p2 = pointRepo.saveAndFlush(p2);
-        Tube tube = new Tube(p1.getId(), p2.getId(), 1, 1, "gost");
+        Tube tube = new Tube(p1.getId(), p2.getId(), formTube.getZ_coord(), formTube.getId_owners(), formTube.getGost());
+        tube.setName(formTube.getName());
+        tube.setType(formTube.getType());
+        tube.setComment(formTube.getComment());
         tubeRepo.saveAndFlush(tube);
-        return "OK";
+        return json(formTube.getType(), null);
     }
 
     @RequestMapping(value = "/with_points", method = RequestMethod.POST)
@@ -177,7 +176,7 @@ public class TubeController {
         if (finish != null)
             tube.setFinish(finish);
         if (z_coord != null)
-            tube.setzCoord(z_coord);
+            tube.setZCoord(z_coord);
         if (type != null)
             tube.setType(type);
         if (id_owners != null)

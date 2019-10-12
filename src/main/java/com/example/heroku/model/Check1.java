@@ -1,14 +1,17 @@
 package com.example.heroku.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(appliesTo = "check1")
 public class Check1 {
 
-    public Check1(){}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,43 +34,4 @@ public class Check1 {
         type = 0;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getObjId() {
-        return objId;
-    }
-
-    public void setObjId(long objId) {
-        this.objId = objId;
-    }
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
 }
