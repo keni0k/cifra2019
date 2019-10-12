@@ -1,319 +1,521 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <title>Archimed</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:400,900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" href="/css/leaflet.css"/>
-    <link rel="stylesheet" href="/css/style.v.1.1.1.css"/>
-    <link rel="stylesheet" href="/css/responsive.css"/>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/leaflet.js"></script>
-    <script src="/js/vue.js"></script>
-    <script src="/js/main.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap&subset=cyrillic" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/tabs.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body>
-<div id="app">
-    <div id="menu-top">
-        <!--            <div class="container-flex">-->
-        <div class="logo">ARCHIMED</div>
-        <div class="right-panel">
-            <div class="search menu-item">
-                <button>Найти</button>
-            </div>
-            <div class="link menu-item">
-                <div class="splitter"></div>
-                <a href="#">Тех.поддержка</a>
-            </div>
-            <div class="account menu-item">
-                <div class="splitter"></div>
-                <div class="text">Участок №3</div>
-                <div class="img"><img src="/img/avatar.png" alt="Участок №3"></div>
-            </div>
+    <div id="app">
+        <div id="menu-top">
+<!--            <div class="container-flex">-->
+                <div class="logo">ARCHIMED</div>
+                <div class="right-panel">
+                    <div class="search menu-item">
+                        <button>Найти</button>
+                    </div>
+                    <div class="link menu-item">
+                        <a href="#">Тех.поддержка</a>
+                    </div>
+                    <div class="account menu-item">
+                        <div class="text">Участок №3</div>
+                        <div class="img"><img src="img/avatar.png" alt="Участок №3"></div>
+                    </div>
+                </div>
+                
+<!--            </div>-->
         </div>
 
-        <!--            </div>-->
-    </div>
-
-    <div id="left-panel">
-        <ul class="accordion-menu">
-            <li class="open" v-on:click="onClickMap">
-                <div class="dropdownlink">
-                    <div class="icon icon-map"></div>
-                    <div class="text">Карта</div>
-                </div>
-                <ul class="submenuItems" id="typeMap" style="display: block;">
-                    <li v-on:click="onClickTypeMap" class="active"><a class="radiobtn radiobtn1"
-                                                                      href="#">Водоснабжение</a></li>
-                    <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn2" href="#">Водоотведение</a></li>
-                    <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn3" href="#">Теплоснабжение</a></li>
-                    <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn4" href="#">Канализация</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="dropdownlink">
-                    <div class="icon icon-fragment"></div>
-                    <div class="text">Фрагмент</div>
-                </div>
-                <ul class="submenuItems">
-                    <li><a href="#" class="active">Схема</a></li>
-                    <li><a href="#" v-on:click="onClickSupport">Информация</a></li>
+        <div id="left-panel">
+            <ul class="accordion-menu">
+                <li class="open" v-on:click="onClickMap">
+                    <div class="dropdownlink">
+                        <div class="icon icon-map"></div>
+                        <div class="text">Карта</div>
+                    </div>
+                    <ul class="submenuItems" id="typeMap" style="display: block;">
+                        <li v-on:click="onClickTypeMap" class="active"><a class="radiobtn radiobtn1" href="#">Водоснабжение</a></li>
+                        <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn2" href="#">Водоотведение</a></li>
+                        <li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn3" href="#">Теплоснабжение</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdownlink">
+                        <div class="icon icon-fragment"></div>
+                        <div class="text">Фрагмент</div>
+                    </div>
+                    <ul class="submenuItems" id="theSubMenuBtn">
+                    <li><a href="#" >Схема</a></li>
+                    <li><a href="#" v-on:click="onClickInfo" class="btn-info">Информация</a></li>
                     <li><a href="#">История правок</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="dropdownlink">
-                    <div class="icon icon-analytica"></div>
-                    <div class="text">Аналитика</div>
-                </div>
-                <ul class="submenuItems">
-                    <li><a href="#">Здесь аналитика</a></li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
+            </ul>            
+            <div class="btn-analitika dropdownlink" v-on:click="onClickAnalitika">
+                <div class="icon icon-analitika"></div>
+                <div class="text">Аналитика</div>
+            </div>
             <div class="btn-support dropdownlink" v-on:click="onClickSupport">
                 <div class="icon icon-support"></div>
                 <div class="text">Поддержка</div>
             </div>
-        </ul>
-        <div class="hide-panel" v-on:click="onClickAccordion">
-            <img id="strelka" src="img/strelka.svg">
-            <span>Свернуть редактор</span>
-        </div>
-    </div>
-
-    <div id="modal-dialog">
-        <p id="modal-dialog-head-text">Все данные об инженерных системах на одной платформе</p>
-
-        <div id="hr-div"></div>
-
-        <p class="modal-dialog-content-text">Что представляет собой ИИС Архимед?</p><br><br><br>
-        <p class="modal-dialog-content-text">Для кого предназначена система?</p><br><br><br>
-        <p class="modal-dialog-content-text">Какие данные доступны вам в системе?</p><br><br><br>
-        <p class="modal-dialog-content-text">Как внести изменения или добавить информацию?
-
-        <div class="btn-close"></div>
-
-        <div id="modal-dialog-content-img">
-            <img src="/img/Group_7_6.svg" width="70%">
         </div>
 
+        <div id="modal-dialog">
+            <p id="modal-dialog-head-text">Все данные об инженерных системах на одной платформе</p>
+            
+            <div id="hr-div"></div>
+                
+            <p class="modal-dialog-content-text">Что представляет собой ИИС Архимед?</p><br><br><br>
+            <p class="modal-dialog-content-text">Для кого предназначена система?</p><br><br><br>
+            <p class="modal-dialog-content-text">Какие данные доступны вам в системе?</p><br><br><br>
+            <p class="modal-dialog-content-text">Как внести изменения или добавить информацию?
+            
+            <div class="btn-close"></div>
+            
+            <div id="modal-dialog-content-img">
+                <img src="img/Group_7_6.svg" width="70%">
+            </div>
+            
+        </div>
+
+        <div id="modal-dialog2">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="he-text"><p class="he-txt">Информация</p></div>
+                <div class="analitika-template"></div>
+        </div>        
+
+        <div id="panel-tools">
+            <div v-on:click="onClickCritical" class="btn-critical">Отобразить крические участки</div>
+            <div v-on:click="onClickAddObject" class="btn-add-object">+ Добавить объект</div>
+            <div class="info-msg">Выберите две точки на карте</div>
+            <div class="NewObjectDialog">
+                <div class="caption-form">
+                    <div class="caption-text">Добавить объект</div>
+                    <div v-on:click="onClickCloseNewObject" class="caption-close">Х</div>
+                </div>
+                <div class="content-form">
+                    <label>Добавьте название объекта</label>
+                    <input type="text" id="NameObject">
+
+                    <label>Координаты объекта</label>
+                    <input type="text" id="BeginPoint" disabled>
+                    <input type="text" id="EndPoint" disabled>
+                    
+                    <label>Добавьте характеристики</label>
+                    <textarea id="Comment" placeholder="Укажите характеристики"></textarea>
+
+                    <label>Объект является проблемным?</label>
+                    <input type="checkbox" id="IsCritical">
+
+                    <div v-on:click="onClickCreateObject" class="btn">+ добавить объект</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="modal-info">
+            <br>
+            <br>
+            <p class="modal-info-text">Глобальные координаты:</p><br>
+            <p class="modal-info-text">55.0394832, 82.9153633</p>
+            <img id="quest-img" src="img/Group%204.22.svg">
+            <div class="he-text"><p class="he-txt">Информация</p></div>
+            <p class="modal-info-text">54.0395672, 81.4654563</p>
+            <br>
+            <br>
+            <br>
+            <div class="tabs">
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" title="Вкладка 1">Параметры</label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2" title="Вкладка 2">Ремонт</label>
+
+                <input id="tab3" type="radio" name="tabs">
+                <label for="tab3" title="Вкладка 3">Дефекты</label>
+
+                <section id="content-tab1">
+                    <div class="div-tab">
+                        <p class="tab-text">X: 21.232, Y: 25.354, Z: 24.54</p>
+                        
+                    </div>
+                    <div class="div-tab">
+                        
+                        <p class="tab-text">Снимки</p>
+                        <img src="img/image%203.png" width="10%">
+                        <img src="img/image%202.png" width="10%">
+                    </div>
+                    <p class="tab-text">Харакеристики</p>
+                    <div class="inp-divs">
+                        <p class="tab-grey-text">Диаметр трубы</p><input class="inpt-tab" type="text"><button class="bt-1" style="position: absolute; margin-left: 39%; width: 14%; height: 30px; margin-top: -3%">Сохранить</button>
+                    </div>
+                    <div class="inp-divs">
+                        <p class="tab-grey-text">Толщина трубы</p><input class="inpt-tab" type="text"><button class="bt-0" style="position: absolute; margin-left: 39%; width: 14%; height: 30px; margin-top: -3%">Изменить</button>
+                    </div>
+                    <div class="inp-divs">
+                        <p class="tab-grey-text">Материал трубы</p><input class="inpt-tab" type="text"><button class="bt-0" style="position: absolute; margin-left: 39%; width: 14%; height: 30px; margin-top: -3%">Изменить</button>
+                    </div>
+                    <div class="inp-divs">
+                        <p class="tab-grey-text">ГОСТ</p><input class="inpt-tab" type="text"><button class="bt-0" style="position: absolute; margin-left: 39%; width: 14%; height: 30px; margin-top: -3%">Изменить</button>
+                    </div>
+                    <div class="inp-divs">
+                        <p class="tab-grey-text">Длина фрагмента</p><input class="inpt-tab" type="text"><button class="bt-0" style="position: absolute; margin-left: 39%; width: 14%; height: 30px; margin-top: -3%">Изменить</button>
+                    </div>
+                </section>  
+                <section id="content-tab2">
+                    <img src="img/Group%20110.svg" width="38%" style="position: absolute; margin-left: 390px; width: 300px;">
+                    <p class="tab-text">Ремонтные работы</p>
+                    <p class="tab-grey-text">Плановый ремонт</p>
+                    <img src="img/image%205.png" width="10%">
+                        <img src="img/image%206.png" width="10%">
+                    <p class="tab-grey-text">+ Добавить фото</p>
+                    <p class="tab-grey-text">/ Изменить данные</p>
+                    <p class="tab-grey-text">23.09.19</p>
+                    <p class="tab-text">Ремонт узла №2</p>
+                    <p class="tab-grey-text">26.09.19</p>
+                    <p class="tab-text">Замена трубопровода</p>
+                    <p class="tab-grey-text">23.09.19</p>
+                    <p class="tab-text">Плановая проверка вентелей</p>
+                    <p class="tab-grey-text">25.09.19</p>
+                    <p class="tab-text">Плановая проверка труб</p>
+                </section> 
+                <section id="content-tab3">
+                    <p class="tab-text">Выявленные дефекты:</p>
+                    <p class="tab-grey-text">23.10.19</p>
+                    <p class="tab-grey-text">*Повреждение вентеля*</p>
+                    <img src="img/image%208.png" width="50%" style="margin-left: 23%">
+                    <p class="tab-text">Развернуть описание</p>
+                    <p class="tab-grey-text">Изменить данные</p>
+                    <center><p class="tab-text">Смотреть дальше</p></center>
+                </section> 
+            </div>           
+        </div>
+
+        <div id="map"></div>
     </div>
+    
+    <script>
+        var map;
+        var typeMap = "#61FFF5";
 
-    <div id="panel-tools">
-        <div v-on:click="onClickCritical" class="btn-critical">Отобразить крические участки</div>
-        <div class="btn-add-object">+ Добавить объект</div>
-    </div>
-
-
-    <div id="map"></div>
-</div>
-
-<script>
-    var map;
-    var typeMap = "#61FFF5";
-
-    const app = new Vue({
-        el: '#app',
-        data: {
-            errors: [],
-            tubes: [],
-            isShowCritical: false,
-            type: 0
-        },
-        mounted: function () {
-            map = L.map('map', {
-                zoomControl: false
-            }).setView([55.038388736512346, 82.91811079370683], 16);
-
-            var osmLayer = new L.TileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap.org</a>'
-            }).addTo(map);
-
-            this.RefreshObjectsOnMap();
-
-            $(function () {
-                var Accordion = function (el, multiple) {
-                    this.el = el || {};
-                    this.multiple = multiple || false;
-
-                    var dropdownlink = this.el.find('.dropdownlink');
-                    dropdownlink.on('click',
-                        {el: this.el, multiple: this.multiple}, this.dropdown);
-                };
-
-                Accordion.prototype.dropdown = function (e) {
-                    var $el = e.data.el,
-                        $this = $(this),
-                        $next = $this.next();
-
-                    if (!$this.parent().hasClass('open')) {
-                        $next.slideToggle();
-                        $this.parent().toggleClass('open');
-                    }
-
-                    if (!e.data.multiple) {
-                        $el.find('.submenuItems').not($next).slideUp().parent().removeClass('open');
-                    }
-                }
-
-                var accordion = new Accordion($('.accordion-menu'), false);
-            });
-        },
-        methods: {
-            onClickAccordion: function (e) {
-                var leftPanel = $('#left-panel');
-                var strelka = $('#strelka');
-                if (leftPanel.css('left') === '-350px') {
-                    leftPanel.animate({
-                        left: '0'
-                    }, 400);
-                    strelka.animate({
-                            myRotationProperty: 0
-                        },
-                        {step: function(now, tween) {
-                                if (tween.prop === "myRotationProperty") {
-                                    $(this).css('-webkit-transform','rotate('+now+'deg)');
-                                    $(this).css('-moz-transform','rotate('+now+'deg)');
-                                    // add Opera, MS etc. variants
-                                    $(this).css('transform','rotate('+now+'deg)');
-                                }
-                            }
-                        });
-                }
-                else {
-                    leftPanel.animate({
-                        left: '-350px'
-                    }, 400);
-                    strelka.animate({
-                            myRotationProperty: 180
-                        },
-                        {step: function(now, tween) {
-                                if (tween.prop === "myRotationProperty") {
-                                    $(this).css('-webkit-transform','rotate('+now+'deg)');
-                                    $(this).css('-moz-transform','rotate('+now+'deg)');
-                                    // add Opera, MS etc. variants
-                                    $(this).css('transform','rotate('+now+'deg)');
-                                }
-                            }
-                        });
-                }
+        const app = new Vue({
+            el: '#app',
+            data: {
+                errors: [],
+                tubes: [],
+                isShowCritical: false,
+                type: 0
             },
-            onClickSupport: function (e) {
-                var dialog = $("#modal-dialog");
-                var panel = $("#left-panel");
-                var body = $("#app");
-                var height = body.height() - 185;
-                var width = body.width() - panel.width() - 100;
+            mounted: function () {
+                map = L.map('map', { zoomControl:false
+                }).setView([55.038388736512346, 82.91811079370683],16);
 
-                dialog.width(width);
-                dialog.css({left: 400, top: 135, height: height});
-                dialog.show();
-                e.preventDefault = false;
-                map.scrollWheelZoom.disable();
-                map.dragging.disable();
-                $("#left-panel .btn-support").addClass('active');
+                var osmLayer = new L.TileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap.org</a>'
+                }).addTo(map);
+
+                this.RefreshObjectsOnMap();                
+
+                $(function() {
+                    var Accordion = function(el, multiple) {
+                        this.el = el || {};
+                        this.multiple = multiple || false;
+                        
+                        var dropdownlink = this.el.find('.dropdownlink');
+                        dropdownlink.on('click',
+                            { el: this.el, multiple: this.multiple }, this.dropdown);
+                    };
+                
+                    Accordion.prototype.dropdown = function(e) {
+                        var $el = e.data.el,
+                            $this = $(this),
+                            $next = $this.next();
+                        
+                        if (!$this.parent().hasClass('open'))
+                        {
+                            $next.slideToggle();
+                            $this.parent().toggleClass('open');
+                        }
+
+                        if(!e.data.multiple) {
+                            $el.find('.submenuItems').not($next).slideUp().parent().removeClass('open');
+                        }
+                    };
+                    
+                    var accordion = new Accordion($('.accordion-menu'), false);
+                });                
             },
-            onClickMap: function () {
-                $("#modal-dialog").hide();
-                map.scrollWheelZoom.enable();
-                map.dragging.enable();
-                $(".dropdownlink .icon-support").parent().removeClass('active');
-            },
-            onClickTypeMap: function (e) {
-                var childs = $("#typeMap").children();
-                var el = e.srcElement;
+            methods: {
+                onClickSupport: function(e){
+                    $("#modal-dialog2").hide();
+                    $("#modal-info").hide();
+                    var dialog = $("#modal-dialog");
+                    var panel = $("#left-panel");
+                    var body = $("#app");
+                    var height = body.height()-185;
+                    var width = body.width()-panel.width()-100;
 
-                Array.from(childs).forEach(function (item) {
-                    if (item != el)
-                        item.classList.remove("active");
-                });
+                    dialog.width(width);
+                    dialog.css({left:400,top:135,height:height});
+                    dialog.show();
+                    e.preventDefault = false;
+                    map.scrollWheelZoom.disable();
+                    map.dragging.disable();
+                    $("#left-panel .btn-support").addClass('active');
+                },
+                onClickInfo: function(e){
+                    var dialog = $("#modal-info");
+                    var panel = $("#left-panel");
+                    var body = $("#app");
+                    var height = body.height()-185;
+                    var width = body.width()-panel.width()-100;
 
-                el.parentElement.classList.add("active");
+                    dialog.width(width);
+                    dialog.css({left:400,top:135,height:height});
+                    dialog.show();
+                    e.preventDefault = false;
+                    map.scrollWheelZoom.disable();
+                    map.dragging.disable();
+                }, 
+                onClickMap: function() {
+                    $("#modal-dialog").hide();
+                    $("#modal-dialog2").hide();
+                    $("#modal-info").hide();
+                    map.scrollWheelZoom.enable();
+                    map.dragging.enable();
+                    $(".dropdownlink .icon-support").parent().removeClass('active');
+                },
+                onClickTypeMap: function(e) {
+                    var childs = $("#typeMap").children();
+                    var el = e.srcElement;
 
-                if (el.classList.contains("radiobtn1"))
-                    this.type = 0;
-                else if (el.classList.contains("radiobtn2"))
-                    this.type = 1;
-                else if (el.classList.contains("radiobtn3"))
-                    this.type = 2;
-                else if (el.classList.contains("radiobtn4"))
-                    this.type = 3;
-
-                this.RefreshObjectsOnMap();
-            },
-            onClickCritical: function () {
-                console.debug(this);
-
-                this.isShowCritical = !this.isShowCritical;
-
-                var btnCritical = $(".btn-critical");
-
-                if (this.isShowCritical) {
-                    btnCritical.text("Скрыть критические участки");
-                    btnCritical.addClass("showCritical");
-                } else {
-                    btnCritical.text("Отобразить критические участки");
-                    btnCritical.removeClass("showCritical");
-                }
-
-                this.RefreshObjectsOnMap();
-            },
-            RefreshObjectsOnMap: function () {
-                var url = '/tube/json?type=' + this.type;
-                axios.get(url)
-                    .then((response) => {
-                    var typeColor;
-
-                if (this.type == 0)
-                    typeColor = "#61FFF5";
-                else if(this.type == 1)
-                    typeColor = "#77FF95";
-                else if (this.type == 2)
-                    typeColor = "#B7DCFF";
-                else if (type == 3)
-                    typeColor = "#FECCE4";
-
-                var stoke = {
-                    weight: 7,
-                    color: typeColor
-                };
-
-                var stokeFail = {
-                    weight: 7,
-                    color: "#f00"
-                };
-
-                while (this.tubes.length) {
-                    this.tubes.pop();
-                }
-
-                var self = this;
-
-                response.data.forEach(function(item){
-                    var polyline;
-
-                    if (self.isShowCritical && item.status!=0)
-                        polyline = L.polyline( [ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stokeFail).addTo(map);
-                    else
-                        polyline = L.polyline( [ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stoke).addTo(map);
-
-                    self.tubes.push(polyline);
-                });
-            })
-            .catch(function (error) {
-                    console.log(error);
-                })
-                    .finally(function () {
+                    Array.from(childs).forEach(function(item) {
+                        if (item !== el)
+                            item.classList.remove("active");
                     });
+
+                    el.parentElement.classList.add("active");
+
+                    if (el.classList.contains("radiobtn1"))
+                        this.type = 0;
+                    else if (el.classList.contains("radiobtn2"))
+                        this.type = 1;
+                    else if (el.classList.contains("radiobtn3"))
+                        this.type = 2;
+                    else if (el.classList.contains("radiobtn4"))
+                        this.type = 3;
+            
+                    this.RefreshObjectsOnMap();
+                },
+                onClickCritical: function() {
+                    console.debug(this);
+                    
+                    this.isShowCritical = !this.isShowCritical;
+
+                    var btnCritical = $(".btn-critical");
+                    
+                    if (this.isShowCritical)
+                    {
+                        btnCritical.text("Скрыть критические участки");
+                        btnCritical.addClass("showCritical");
+                    }
+                    else
+                    {
+                        btnCritical.text("Отобразить критические участки");
+                        btnCritical.removeClass("showCritical");
+                    }
+
+                    this.RefreshObjectsOnMap();
+                },
+                onClickAddObject: function() {
+                    $(".info-msg").text("Введите первую координату на карте");
+                    $(".info-msg").show();
+
+                    var i = 0;
+                    var self = this;
+                    var point1;
+
+                    var onClick = function(e) {
+                        i++;
+
+                        if (i === 1)
+                        {
+                            point1 = e.latlng;
+                            $(".info-msg").text("Введите вторую координату на карте");
+                        }
+                        else if (i === 2) {
+                            map.off('click', onClick);
+                            $(".info-msg").hide();
+                            self.ShowAddDialog(point1, e.latlng);
+                        }
+                    };
+
+                    map.on('click', onClick);
+                },
+                onClickCloseNewObject: function() {
+                    $(".NewObjectDialog").hide();
+                },
+                onClickCreateObject: function() {
+                    var point1 = $("#BeginPoint").val();
+                    var point2 = $("#EndPoint").val();
+                    var name = $("#NameObject").val();
+                    var comment = $("#Comment").val();
+                    var isCritical = $("#IsCritical").is(':checked');
+
+                    var lat1 = point1.slice(1,point1.indexOf(";"));
+                    var lon1 = point1.slice(point1.indexOf(";")+2, point1.length-1);
+                    var lat2 = point2.slice(1,point2.indexOf(";"));
+                    var lon2 = point2.slice(point2.indexOf(";")+2, point2.length-1);
+
+                    var url = '/tube/add2';
+
+                    axios.post(url, {
+                                p1_lat: lat1,
+                                p1_lon: lon1,
+                                p2_lat: lat2,
+                                p2_lon: lon2
+                            })
+                         .then(function(response){
+                            var typeColor;
+                            
+                            if (this.type === 0)
+                                typeColor = "#61FFF5";
+                            else if(this.type === 1)
+                                typeColor = "#77FF95";
+                            else if (this.type === 2)
+                                typeColor = "#B7DCFF";
+                            else if (this.type === 3)
+                                typeColor = "#FECCE4";
+
+                            var stoke = {
+                                weight: 7,
+                                color: typeColor
+                            };
+
+                            var stokeFail = {
+                                weight: 7,
+                                color: "#f00"
+                            };
+                            while (typeof this.tubes !== 'undefined' && this.tubes.length) {
+                                this.tubes.pop();
+                            }
+                            
+                            var self = this;
+
+                            response.data.forEach(function(item){
+                                var polyline;
+
+                                if (self.isShowCritical && item.status!==0)
+                                    polyline = L.polyline([ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stokeFail).addTo(map);
+                                else
+                                    polyline = L.polyline([ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stoke).addTo(map);
+
+                                    self.tubes.push(polyline);
+                            });
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        })
+                        .finally(function () {
+                        });
+
+                    $(".NewObjectDialog").hide();
+                },
+                onClickAnalitika: function() {
+                    $("#modal-dialog").hide();
+                    $("#modal-info").hide();
+                    var dialog = $("#modal-dialog2");
+                    var panel = $("#left-panel");
+                    var body = $("#app");
+                    var height = body.height()-135;
+                    var width = body.width()-panel.width()-100;
+
+                    dialog.width(width);
+                    dialog.css({left:400,top:135,height:height});
+                    dialog.show();
+                    e.preventDefault = false;
+                    map.scrollWheelZoom.disable();
+                    map.dragging.disable();
+                    $("#left-panel .btn-analitika").addClass('active');
+                },
+                ShowAddDialog: function(p1, p2) {
+                    $("#BeginPoint").val('('+p1.lat+'; '+p1.lng+')');
+                    $("#EndPoint").val('('+p2.lat+'; '+p2.lng+')');
+                    $(".NewObjectDialog").show();
+                },
+                RefreshObjectsOnMap: function() {
+                    var url = '/tube/json?type='+this.type;
+                    // var url = 'http://localhost/tube.php';
+
+                    axios.get(url)
+                        .then(function(response){
+                            var typeColor;
+                            
+                            if (this.type === 0)
+                                typeColor = "#61FFF5";
+                            else if(this.type === 1)
+                                typeColor = "#77FF95";
+                            else if (this.type === 2)
+                                typeColor = "#B7DCFF";
+                            else if (this.type === 3)
+                                typeColor = "#FECCE4";
+
+                            var stoke = {
+                                weight: 7,
+                                color: typeColor
+                            };
+
+                            var stokeFail = {
+                                weight: 7,
+                                color: "#f00"
+                            };
+
+                            while (typeof this.tubes !== 'undefined' && this.tubes.length) {
+                                this.tubes.pop();
+                            }
+                            
+                            var self = this;
+
+                            response.data.forEach(function(item){
+                                var polyline;
+
+                                if (self.isShowCritical && item.status!==0)
+                                    polyline = L.polyline([ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stokeFail).addTo(map);
+                                else
+                                    polyline = L.polyline([ [item.startPoint.lat, item.startPoint.lon],[item.endPoint.lat, item.endPoint.lon]], stoke).addTo(map);
+
+                                    self.tubes.push(polyline);
+                            });
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        })
+                        .finally(function () {
+                        });                    
+                }
             }
-        }
-    });
+        });
+      
+    </script>
 
-
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

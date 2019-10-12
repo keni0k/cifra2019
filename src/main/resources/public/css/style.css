@@ -334,7 +334,7 @@ color: #171932;
 
     color: #171932;
 }
-#he-text {
+.he-text {
     position: absolute;
     margin-top: -4%;
     width: 365px;
@@ -342,7 +342,7 @@ color: #171932;
     margin-left: 60%;
     background: linear-gradient(270deg, #D1FF4E 6.81%, rgba(11, 12, 28, 0) 87.17%);
 }
-#he-txt {
+.he-txt {
     width: 254.84px;
     height: 36px;
     margin-left: 30%;
@@ -913,4 +913,36 @@ color: #171932;
     width: 100%;
     height: 100%;
     background: url('/img/analitika-template.png') no-repeat center center;
+}
+
+/*DIMA*/
+.hide-panel {
+    cursor: pointer;
+    top: 50%;
+    left: 350px;
+    position: absolute;
+    width: 60px;
+    height: 200px;
+    background: linear-gradient(0deg, #171932, #171932);
+    border-radius: 0 10px 10px 0;
+}
+.hide-panel span{
+    position: absolute;
+    width: 221px;
+    height: 28px;
+    left: -95px;
+    top: 35px;
+    font-family: Roboto, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #D1FF4E;
+    transform: rotate(-90deg);
+}
+.hide-panel img {
+    position: absolute;
+    width: 27px;
+    left: 15px;
+    box-shadow: 0 0 8px rgba(23, 37, 54, 0.25);
 }
