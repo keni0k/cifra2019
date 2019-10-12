@@ -10,9 +10,9 @@ Make sure you have Java installed.  Also, install the [Heroku Toolbelt](https://
 
 ```sh
 $ git clone https://github.com/keni0k/cifra2019.git
-$ cd cifra2019
-$ ./gradlew stage
-$ heroku local web
+cd cifra2019
+./gradlew stage
+heroku local web
 ```
 
 Your app should now be running on [localhost:8080](http://localhost:8080/).
@@ -28,11 +28,13 @@ spring.datasource.url = jdbc:postgresql://HOST_NAME:5432/DATABASE?user=USER&pass
 
 ```sh
 $ heroku create
-$ git push heroku master
-$ heroku open
+git push heroku master
+heroku open
 ```
 
 ## Documentation
+
+- API: [Google Tables](https://docs.google.com/spreadsheets/d/1L5EsxPQf7EZdWSToxF0EjT_7vxg8TEJylpIweO9XBbE/edit#gid=1080676204)
 
 For more information about using Java on Heroku, see these Dev Center articles:
 
