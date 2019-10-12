@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -27,10 +28,10 @@ public class Point {
     @Column(name = "description")
     private String description = "";
 
-    @Column(name = "lat")
+    @Column(name = "lat", nullable = false)
     private double lat;
 
-    @Column(name = "lon")
+    @Column(name = "lon", nullable = false)
     private double lon;
 
     @Column(name = "size")
