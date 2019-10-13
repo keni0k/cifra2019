@@ -1,14 +1,14 @@
 # ARCHIMED
 
-A barebones Gradle app, which can easily be deployed to Heroku.
-
-This application support the [Getting Started with Gradle on Heroku](https://devcenter.heroku.com/articles/getting-started-with-gradle-on-heroku) article - check it out.
+Gradle app, which can easily be deployed to Heroku.
 
 ## Running Locally
 
-Make sure you have Java installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+Make sure you have Java 8+ installed and added into PATH. 
 
-#### Be careful: java 8+ in PATH
+Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+
+And you need to have [PostgreSQL](https://www.postgresql.org/download/).
 
 ```sh
 $ git clone https://github.com/keni0k/cifra2019.git

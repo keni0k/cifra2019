@@ -59,12 +59,12 @@ public class PointController {
     @RequestMapping(value = "/del", method = RequestMethod.GET)
     String db_del(ModelMap modelMap,
                   Long id) {
-        pointRepo.deleteById(id);
         for (Tube tube : tubeRepo.findAll()) {
-            if (tube.getStart() == id || tube.getFinish() == id){
+            if (tube.getStartPoint().getId() == id || tube.getEndPoint().getId() == id){
                 tubeRepo.delete(tube);
             }
         }
+        pointRepo.deleteById(id);
         return "redirect:/point/";
     }
 

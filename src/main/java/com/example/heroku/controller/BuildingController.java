@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,9 +45,8 @@ public class BuildingController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    String db_ins(ModelMap modelMap, String address,
-                  int type, long topLeft, long botRight, long topRight, long botLeft, int countOfPeople, String created, String capitalFix) {
-        buildingRepo.saveAndFlush(new Building(address, type, topLeft, botRight, topRight, botLeft, countOfPeople, created, capitalFix));
+    String db_ins(ModelMap modelMap, @RequestBody Building building) {
+        buildingRepo.saveAndFlush(building);
         return db(modelMap);
     }
 
@@ -58,33 +58,7 @@ public class BuildingController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    String db_edit(ModelMap modelMap, Long id,
-                   Integer type, Long topLeft, Long botRight,
-                   Long topRight, Long botLeft, Integer peopleCount,
-                   String created, String capitalFix,
-                   String address, Long owner) {
-        Building building = buildingRepo.getBuildingById(id);
-        if (type != null)
-            building.setType(type);
-        if (topLeft != null)
-            building.setTopLeft(topLeft);
-        if (botLeft != null)
-            building.setBotLeft(botLeft);
-        if (topRight != null)
-            building.setTopRight(topRight);
-        if (botRight != null)
-            building.setBotRight(botRight);
-        if (peopleCount != null)
-            building.setPeopleCount(peopleCount);
-        if (created != null)
-            building.setCreated(created);
-        if (capitalFix != null)
-            building.setCapitalFix(capitalFix);
-        if (address != null)
-            building.setAddress(address);
-        if (owner != null)
-            building.setOwner(owner);
-        // TOdo edit
+    String db_edit(ModelMap modelMap, @RequestBody Building building) {
         buildingRepo.save(building);
         return "redirect:/building/";
     }

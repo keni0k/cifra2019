@@ -4,26 +4,19 @@ import lombok.*;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(appliesTo = "point")
-public class Point {
+public class Point extends MapObject{
 
 
-    public Point(String description, double lat, double lon, int size) {
-        this.description = description;
-        this.lat = lat;
-        this.lon = lon;
-        this.size = size;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @Column(name = "description")
     private String description = "";

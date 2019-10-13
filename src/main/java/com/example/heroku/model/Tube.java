@@ -1,29 +1,23 @@
 package com.example.heroku.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Random;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(appliesTo = "tube")
-public class Tube {
+public class Tube extends MapObject{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "start")
-    private long start;
-    @Column(name = "finish")
-    private long finish;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
     @Column(name = "id_owners")
     private long idOwners;
     @Column(name = "z_coord")
@@ -45,26 +39,28 @@ public class Tube {
     private Date input;
     @Column(name = "output_date")
     private Date output;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Point.class)
+    @JoinColumn(name = "start_point_id", nullable = false)
+    private Point startPoint;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Point.class)
+    @JoinColumn(name = "end_point_id", nullable = false)
+    private Point endPoint;
 
     @Transient
     private int status;
-    @Transient
-    private Point startPoint;
-    @Transient
-    private Point endPoint;
 
-    public Tube(long start, long finish, float zCoord, long idOwners) {
-        this.start = start;
-        this.finish = finish;
+    public Tube(Point start, Point finish, float zCoord, long idOwners) {
+        this.startPoint = start;
+        this.endPoint = finish;
         this.zCoord = zCoord;
         this.idOwners = idOwners;
         this.input = new Date();
         this.output = new Date();
     }
 
-    public Tube(long start, long finish, float zCoord, long idOwners, String gost) {
-        this.start = start;
-        this.finish = finish;
+    public Tube(Point start, Point finish, float zCoord, long idOwners, String gost) {
+        this.startPoint = start;
+        this.endPoint = finish;
         this.zCoord = zCoord;
         this.idOwners = idOwners;
         this.gost = gost;
@@ -76,11 +72,11 @@ public class Tube {
         this.type = random.nextInt(5);
     }
 
-    public Tube(long start, long finish, float zCoord, long idOwners,
+    public Tube(Point start, Point finish, float zCoord, long idOwners,
                 int type, int diameter, int thickness, Date input,
                 Date output, String gost) {
-        this.start = start;
-        this.finish = finish;
+        this.startPoint = start;
+        this.endPoint = finish;
         this.zCoord = zCoord;
         this.idOwners = idOwners;
         this.input = input;
@@ -91,9 +87,9 @@ public class Tube {
         this.gost = gost;
     }
 
-    public Tube(long start, long finish, float zCoord, int type, long idOwners) {
-        this.start = start;
-        this.finish = finish;
+    public Tube(Point start, Point finish, float zCoord, int type, long idOwners) {
+        this.startPoint = start;
+        this.endPoint = finish;
         this.zCoord = zCoord;
         this.type = type;
         this.idOwners = idOwners;

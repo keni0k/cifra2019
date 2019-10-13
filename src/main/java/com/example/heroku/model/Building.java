@@ -1,25 +1,25 @@
 package com.example.heroku.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(appliesTo = "building")
-public class Building {
+public class Building extends MapObject{
 
-    public Building(){}
-
-    public Building(String address, int type, long topLeft, long botRight, long topRight, long botLeft, int peopleCount, String created, String capitalFix) {
+    public Building(long id) {
+        super(id);
+    }
+//
+    public Building(String address, int type, Point topLeft, Point botRight, Point topRight, Point botLeft, int peopleCount, String created, String capitalFix) {
         this.type = type;
         this.address = address;
         this.topLeft = topLeft;
@@ -31,101 +31,27 @@ public class Building {
         this.capitalFix = capitalFix;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    long id;
     String address;
     int type;
-    long topLeft;
-    long botRight;
-    long topRight;
-    long botLeft;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Point.class)
+    @JoinColumn(name = "top_left_point_id", nullable = false)
+    Point topLeft;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Point.class)
+    @JoinColumn(name = "bot_right_point_id", nullable = false)
+    Point botRight;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Point.class)
+    @JoinColumn(name = "top_right_point_id", nullable = false)
+    Point topRight;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Point.class)
+    @JoinColumn(name = "bot_left_point_id", nullable = false)
+    Point botLeft;
     int peopleCount;
     long owner;
     String created;
     String capitalFix;
 
-    public long getId(){
-        return id;
-    }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public long getTopLeft() {
-        return topLeft;
-    }
-
-    public void setTopLeft(long topLeft) {
-        this.topLeft = topLeft;
-    }
-
-    public long getBotRight() {
-        return botRight;
-    }
-
-    public void setBotRight(long botRight) {
-        this.botRight = botRight;
-    }
-
-    public long getTopRight() {
-        return topRight;
-    }
-
-    public void setTopRight(long topRight) {
-        this.topRight = topRight;
-    }
-
-    public long getBotLeft() {
-        return botLeft;
-    }
-
-    public void setBotLeft(long botLeft) {
-        this.botLeft = botLeft;
-    }
-
-    public int getPeopleCount() {
-        return peopleCount;
-    }
-
-    public void setPeopleCount(int peopleCount) {
-        this.peopleCount = peopleCount;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getCapitalFix() {
-        return capitalFix;
-    }
-
-    public void setCapitalFix(String capitalFix) {
-        this.capitalFix = capitalFix;
-    }
-
-    public long getOwner() {
-        return owner;
-    }
-
-    public void setOwner(long owner) {
-        this.owner = owner;
-    }
 }
