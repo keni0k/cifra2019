@@ -8,16 +8,16 @@ This application support the [Getting Started with Gradle on Heroku](https://dev
 
 Make sure you have Java installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
-#### Be careful: java 10+, PATH, gradle 6
+#### Be careful: java 8+ in PATH
 
 ```sh
 $ git clone https://github.com/keni0k/cifra2019.git
 cd cifra2019
-./gradlew bootRun
+./gradlew build
 heroku local web
 ```
 
-Your app should now be running on [localhost:8080](http://localhost:8080/).
+Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 If you're going to use a database, find file application.properties and change parameter spring.datasource.url
 
@@ -29,7 +29,7 @@ spring.datasource.url = jdbc:postgresql://HOST_NAME:5432/DATABASE?user=USER&pass
 ## Deploying to Heroku
 
 ```sh
-$ heroku create
+$ git commit -a
 git push heroku master
 heroku open
 ```
