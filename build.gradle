@@ -7,8 +7,8 @@ plugins {
 group = 'com.example'
 version = '1.0'
 
-targetCompatibility = '10'
-sourceCompatibility = '10'
+targetCompatibility = '1.8'
+sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
