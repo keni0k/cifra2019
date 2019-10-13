@@ -10,6 +10,8 @@ Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
 And you need to have [PostgreSQL](https://www.postgresql.org/download/).
 
+Create new database and copy credentials to */src/main/resources/application.properties*
+
 ```sh
 $ git clone https://github.com/keni0k/cifra2019.git
 cd cifra2019
