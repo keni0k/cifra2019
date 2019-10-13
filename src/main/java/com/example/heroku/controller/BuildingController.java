@@ -22,16 +22,6 @@ public class BuildingController {
         this.buildingRepo = buildingRepo;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    String db(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("type", 2);
-        modelMap.addAttribute("building_ed", new Building());
-//        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
-        modelMap.addAttribute("buildings", buildingRepo.findAll());
-        return "db";
-    }
-
     @RequestMapping("/json")
     @ResponseBody
     String json() {
@@ -47,7 +37,7 @@ public class BuildingController {
     @RequestMapping(method = RequestMethod.POST)
     String db_ins(ModelMap modelMap, @RequestBody Building building) {
         buildingRepo.saveAndFlush(building);
-        return db(modelMap);
+        return json();
     }
 
     @RequestMapping(value = "/del", method = RequestMethod.GET)

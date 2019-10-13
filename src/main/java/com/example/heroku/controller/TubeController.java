@@ -29,23 +29,10 @@ public class TubeController {
         this.tubeRepo = tubeRepo;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    String db(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("type", 1);
-        modelMap.addAttribute("tube_ed", new Tube());
-        modelMap.addAttribute("points", pointRepo.findAll());
-//        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
-        modelMap.addAttribute("tubes", tubeRepo.findAll());
-        return "db";
-    }
-
     @RequestMapping("/json")
     @ResponseBody
-    String json(@RequestParam(required = false)
-                        Integer type,
-                @RequestParam(required = false)
-                        Long id) {
+    String json(@RequestParam(required = false) Integer type,
+                @RequestParam(required = false) Long id) {
         ObjectMapper obj = new ObjectMapper();
         try {
             List<Tube> tubes;
@@ -136,32 +123,9 @@ public class TubeController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    String db_edit(
-            @RequestBody Tube tube) {
+    String db_edit(@RequestBody Tube tube) {
         tubeRepo.save(tube);
-        return "redirect:/tube/";
-    }
-
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    String edit(ModelMap modelMap, Long id) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("type", 1);
-        modelMap.addAttribute("tube_ed", tubeRepo.getTubeById(id));
-        modelMap.addAttribute("tubes", tubeRepo.findAll());
-        modelMap.addAttribute("points", pointRepo.findAll());
-        return "db";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    String update(ModelMap modelMap) {
-        for (Tube tube : tubeRepo.findAll()) {
-            tube.setType(0);
-            tube.setDiameter(100);
-            tube.setGost("ГОСТ 3262-75");
-            tube.setThickness(10);
-            tubeRepo.save(tube);
-        }
-        return "db";
+        return json(null, null);
     }
 
 }

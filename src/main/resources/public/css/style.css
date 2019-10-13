@@ -45,48 +45,38 @@ table {
 
 /*********************************/
 #hr-div{
-    margin-top: 20%;
-    margin-left: 12%;
-    position: absolute;
-    width: 686px;
-    height: 0px;
+    height: 0;
     border: 1px solid #FFFFFF;
     
 }
 #modal-dialog-content-img,
 #modal-dialog2-content-img{
-    margin-left: 55%;
+    margin-left: 60%;
     margin-top: 7%;
+    position: absolute;
 }
 #modal-dialog-head-text,
 #modal-dialog2-head-text{
-    margin-left: 10%;
-    margin-top: 5%;
+    margin: 5%;
     color: white;
-    position: absolute;
-    width: 709px;
-    height: 64px;
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     line-height: 56px;
     text-align: center;
 }
 .modal-dialog-content-text,
 .modal-dialog2-content-text{
-    margin-top: 23%;
+    margin-top: 3%;
     margin-left: 8%;
     color: white;
-    position: absolute;
     width: 314px;
-    height: 34px;
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 20px;
-
 }
 
 
@@ -163,7 +153,7 @@ html, body, #app, #map {
 
 #quest-img{
     position: absolute;
-    margin-left: 40%;
+    margin-left: 50%;
     margin-top: -25px;
     margin-bottom: -40px;
 }
@@ -336,10 +326,10 @@ color: #171932;
 }
 .he-text {
     position: absolute;
-    margin-top: -4%;
+    margin-top: 4%;
     width: 365px;
     height: 60px;
-    margin-left: 60%;
+    margin-left: 50%;
     background: linear-gradient(270deg, #D1FF4E 6.81%, rgba(11, 12, 28, 0) 87.17%);
 }
 .he-txt {
@@ -400,7 +390,8 @@ color: #171932;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
-    line-height: 28px;  
+    line-height: 28px;
+    outline-style: none;
     cursor: pointer;  
 }
 
@@ -432,7 +423,7 @@ color: #171932;
 
 #left-panel {
     position: absolute;
-    height: calc(100% - 85px);
+    height: 100%;
     width: 350px;
     top: 0;
     left: 0;
@@ -461,6 +452,7 @@ color: #171932;
     font-weight: 500;
     font-size: 24px;
     line-height: 42px;
+    margin-bottom: 0;
 }
 
 #left-panel .accordion-menu li.open .dropdownlink {
@@ -478,11 +470,10 @@ color: #171932;
 
 #left-panel .dropdownlink {
     cursor: pointer;
-    display: block;
     padding: 15px 15px 15px 45px;
     position: relative;
     transition: all 0.4s ease-out;
-    height: 50px; 
+    height: 68px;
     display: flex;
 }
 
@@ -538,7 +529,7 @@ color: #171932;
 #left-panel .submenuItems a {
     display: block;
     color: #fff;
-    padding: 12px 12px 12px 45px;
+    padding: 25px 0 25px 45px;
     transition: all 0.4s ease-out;
 }
 
@@ -589,6 +580,11 @@ color: #171932;
     height: 33px;
 }
 
+#left-panel #theSubMenuBtn a {
+    box-sizing: content-box;
+    padding: 10px 45px;
+}
+
 #left-panel .submenuItems a.active {
     background: linear-gradient(270deg, #D1FF4E 10.2%, rgba(188, 229, 73, 0.74) 39.58%, rgba(11, 12, 28, 0) 100%);
 }
@@ -603,11 +599,9 @@ color: #171932;
     font-size: 24px;
     line-height: 42px;
     cursor: pointer;
-    display: block;
     padding: 15px 15px 15px 45px;
     position: relative;
     transition: all 0.4s ease-out;
-    height: 50px; 
     display: flex;
 }
 
@@ -630,11 +624,9 @@ color: #171932;
 #left-panel .btn-support,
 #left-panel .btn-analitika {
     cursor: pointer;
-    display: block;
     padding: 15px 15px 15px 45px;
     position: relative;
     transition: all 0.4s ease-out;
-    height: 50px; 
     display: flex;
 }
 
@@ -657,6 +649,10 @@ color: #171932;
 #left-panel .btn-support.active,
 #left-panel .btn-analitika.active {
     background: #000;
+}
+#left-panel .btn-support.dropdownlink{
+    box-sizing: content-box;
+    padding-bottom: 5px;
 }
 .upper-white-block-text{
     width: 539px;
@@ -690,7 +686,7 @@ color: #171932;
     margin-top: 30px;
     width: 80%;
     height: 40px;
-    border: 0px;
+    border: 0;
     font-family: Arial;
     border: 3px solid #171932;
     box-sizing: border-box;
@@ -949,4 +945,10 @@ color: #171932;
 .tube {
     stroke-width: 4px;
     cursor: cell;
+}
+#modal-dialog p.modal-dialog-content-text{
+    cursor: pointer;
+}
+.sets .input-group-text span{
+    width: 150px;
 }

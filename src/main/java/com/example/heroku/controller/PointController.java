@@ -26,16 +26,6 @@ public class PointController {
         this.tubeRepo = tubeRepo;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    String db(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("type", 0);
-        modelMap.addAttribute("point_ed", new Point());
-//        modelMap.addAttribute("message", new MessageUtil("success", "Something text"));
-        modelMap.addAttribute("points", pointRepo.findAll());
-        return "db";
-    }
-
     @RequestMapping("/json")
     @ResponseBody
     String json() {
@@ -53,7 +43,7 @@ public class PointController {
                   double lat, double lon,
                   int size) {
         pointRepo.saveAndFlush(new Point(description, lat, lon, size));
-        return db(modelMap);
+        return json();
     }
 
     @RequestMapping(value = "/del", method = RequestMethod.GET)
