@@ -8,10 +8,12 @@ This application support the [Getting Started with Gradle on Heroku](https://dev
 
 Make sure you have Java installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
+#### Be careful: java 10+, PATH, gradle 6
+
 ```sh
 $ git clone https://github.com/keni0k/cifra2019.git
 cd cifra2019
-./gradlew stage
+./gradlew bootRun
 heroku local web
 ```
 

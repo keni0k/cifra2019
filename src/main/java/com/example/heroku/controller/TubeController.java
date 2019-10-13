@@ -98,8 +98,7 @@ public class TubeController {
 
     @RequestMapping(value = "/add2", method = RequestMethod.POST)
     @ResponseBody
-    String dbs_ins2(ModelMap modelMap,
-                    @RequestBody FormTube formTube){
+    String dbs_ins2(@RequestBody FormTube formTube){
         Point p1 = new Point(formTube.getDesc1(), formTube.getP1_lat(), formTube.getP1_lon(), formTube.getSize1());
         Point p2 = new Point(formTube.getDesc2(), formTube.getP2_lat(), formTube.getP2_lon(), formTube.getSize2());
         p1 = pointRepo.saveAndFlush(p1);

@@ -528,8 +528,10 @@
 
                             if (self.isShowCritical && item.status !== 0)
                                 polyline = L.polyline([ [item.startPoint.lat, item.startPoint.lon], [item.endPoint.lat, item.endPoint.lon] ], stokeFail).addTo(map);
-                            else
+                            else {
                                 polyline = L.polyline([ [item.startPoint.lat, item.startPoint.lon], [item.endPoint.lat, item.endPoint.lon] ], stoke).addTo(map);
+                                polyline.className = "tube";
+                            }
 
                             self.tubes.push(polyline);
                         });

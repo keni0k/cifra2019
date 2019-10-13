@@ -946,3 +946,7 @@ color: #171932;
     left: 15px;
     box-shadow: 0 0 8px rgba(23, 37, 54, 0.25);
 }
+.tube {
+    stroke-width: 4px;
+    cursor: cell;
+}
